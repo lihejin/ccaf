@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccaf.dao.Tgen408Dao">
+
+	<select id="get" resultType="com.ccaf.domain.Tgen408DO">
+		select `bin_nbr`,`bch_cde`,`seq_nbr`,`atv_ind`,`map_bch_cde`,`lst_pan_seq_nbr`,`lst_rnm_bse_nbr`,`usd_pan_rnm_nbr`,`pdt_idn_cde`,`lst_upd_ttp`,`lst_upd_uid`,`lst_upd_nbr` from tb_tgen408 where bin_nbr = #{value}
+	</select>
+
+	<select id="list" resultType="com.ccaf.domain.Tgen408DO">
+		select `bin_nbr`,`bch_cde`,`seq_nbr`,`atv_ind`,`map_bch_cde`,`lst_pan_seq_nbr`,`lst_rnm_bse_nbr`,`usd_pan_rnm_nbr`,`pdt_idn_cde`,`lst_upd_ttp`,`lst_upd_uid`,`lst_upd_nbr` from tb_tgen408
+        <where>  
+		  		  <if test="binNbr != null and binNbr != ''"> and bin_nbr = #{binNbr} </if>
+		  		  <if test="bchCde != null and bchCde != ''"> and bch_cde = #{bchCde} </if>
+		  		  <if test="seqNbr != null and seqNbr != ''"> and seq_nbr = #{seqNbr} </if>
+		  		  <if test="atvInd != null and atvInd != ''"> and atv_ind = #{atvInd} </if>
+		  		  <if test="mapBchCde != null and mapBchCde != ''"> and map_bch_cde = #{mapBchCde} </if>
+		  		  <if test="lstPanSeqNbr != null and lstPanSeqNbr != ''"> and lst_pan_seq_nbr = #{lstPanSeqNbr} </if>
+		  		  <if test="lstRnmBseNbr != null and lstRnmBseNbr != ''"> and lst_rnm_bse_nbr = #{lstRnmBseNbr} </if>
+		  		  <if test="usdPanRnmNbr != null and usdPanRnmNbr != ''"> and usd_pan_rnm_nbr = #{usdPanRnmNbr} </if>
+		  		  <if test="pdtIdnCde != null and pdtIdnCde != ''"> and pdt_idn_cde = #{pdtIdnCde} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="lstUpdUid != null and lstUpdUid != ''"> and lst_upd_uid = #{lstUpdUid} </if>
+		  		  <if test="lstUpdNbr != null and lstUpdNbr != ''"> and lst_upd_nbr = #{lstUpdNbr} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by bin_nbr desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from tb_tgen408
+		 <where>  
+		  		  <if test="binNbr != null and binNbr != ''"> and bin_nbr = #{binNbr} </if>
+		  		  <if test="bchCde != null and bchCde != ''"> and bch_cde = #{bchCde} </if>
+		  		  <if test="seqNbr != null and seqNbr != ''"> and seq_nbr = #{seqNbr} </if>
+		  		  <if test="atvInd != null and atvInd != ''"> and atv_ind = #{atvInd} </if>
+		  		  <if test="mapBchCde != null and mapBchCde != ''"> and map_bch_cde = #{mapBchCde} </if>
+		  		  <if test="lstPanSeqNbr != null and lstPanSeqNbr != ''"> and lst_pan_seq_nbr = #{lstPanSeqNbr} </if>
+		  		  <if test="lstRnmBseNbr != null and lstRnmBseNbr != ''"> and lst_rnm_bse_nbr = #{lstRnmBseNbr} </if>
+		  		  <if test="usdPanRnmNbr != null and usdPanRnmNbr != ''"> and usd_pan_rnm_nbr = #{usdPanRnmNbr} </if>
+		  		  <if test="pdtIdnCde != null and pdtIdnCde != ''"> and pdt_idn_cde = #{pdtIdnCde} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="lstUpdUid != null and lstUpdUid != ''"> and lst_upd_uid = #{lstUpdUid} </if>
+		  		  <if test="lstUpdNbr != null and lstUpdNbr != ''"> and lst_upd_nbr = #{lstUpdNbr} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.ccaf.domain.Tgen408DO">
+		insert into tb_tgen408
+		(
+			`bin_nbr`, 
+			`bch_cde`, 
+			`seq_nbr`, 
+			`atv_ind`, 
+			`map_bch_cde`, 
+			`lst_pan_seq_nbr`, 
+			`lst_rnm_bse_nbr`, 
+			`usd_pan_rnm_nbr`, 
+			`pdt_idn_cde`, 
+			`lst_upd_ttp`, 
+			`lst_upd_uid`, 
+			`lst_upd_nbr`
+		)
+		values
+		(
+			#{binNbr}, 
+			#{bchCde}, 
+			#{seqNbr}, 
+			#{atvInd}, 
+			#{mapBchCde}, 
+			#{lstPanSeqNbr}, 
+			#{lstRnmBseNbr}, 
+			#{usdPanRnmNbr}, 
+			#{pdtIdnCde}, 
+			#{lstUpdTtp}, 
+			#{lstUpdUid}, 
+			#{lstUpdNbr}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.ccaf.domain.Tgen408DO">
+		update tb_tgen408 
+		<set>
+			<if test="bchCde != null">`bch_cde` = #{bchCde}, </if>
+			<if test="seqNbr != null">`seq_nbr` = #{seqNbr}, </if>
+			<if test="atvInd != null">`atv_ind` = #{atvInd}, </if>
+			<if test="mapBchCde != null">`map_bch_cde` = #{mapBchCde}, </if>
+			<if test="lstPanSeqNbr != null">`lst_pan_seq_nbr` = #{lstPanSeqNbr}, </if>
+			<if test="lstRnmBseNbr != null">`lst_rnm_bse_nbr` = #{lstRnmBseNbr}, </if>
+			<if test="usdPanRnmNbr != null">`usd_pan_rnm_nbr` = #{usdPanRnmNbr}, </if>
+			<if test="pdtIdnCde != null">`pdt_idn_cde` = #{pdtIdnCde}, </if>
+			<if test="lstUpdTtp != null">`lst_upd_ttp` = #{lstUpdTtp}, </if>
+			<if test="lstUpdUid != null">`lst_upd_uid` = #{lstUpdUid}, </if>
+			<if test="lstUpdNbr != null">`lst_upd_nbr` = #{lstUpdNbr}</if>
+		</set>
+		where bin_nbr = #{binNbr}
+	</update>
+	
+	<delete id="remove">
+		delete from tb_tgen408 where bin_nbr = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from tb_tgen408 where bin_nbr in 
+		<foreach item="binNbr" collection="array" open="(" separator="," close=")">
+			#{binNbr}
+		</foreach>
+	</delete>
+
+</mapper>

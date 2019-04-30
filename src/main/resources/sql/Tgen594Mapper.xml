@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Tcom.ccaf.dao.gen594Dao">
+
+	<select id="get" resultType="com.ccaf.domain.Tgen594DO">
+		select `pay_typ_cde`,`pay_chl_cde`,`app_idn_sky`,`dly_txn_1_amt`,`mth_txn_1_amt`,`dly_txn_2_amt`,`mth_txn_2_amt`,`lst_txn_dte`,`lst_upd_dte`,`lst_upd_tme`,`lst_upd_uid`,`lst_upd_nbr` from tb_tgen594 where pay_typ_cde = #{value}
+	</select>
+
+	<select id="list" resultType="com.ccaf.domain.Tgen594DO">
+		select `pay_typ_cde`,`pay_chl_cde`,`app_idn_sky`,`dly_txn_1_amt`,`mth_txn_1_amt`,`dly_txn_2_amt`,`mth_txn_2_amt`,`lst_txn_dte`,`lst_upd_dte`,`lst_upd_tme`,`lst_upd_uid`,`lst_upd_nbr` from tb_tgen594
+        <where>  
+		  		  <if test="payTypCde != null and payTypCde != ''"> and pay_typ_cde = #{payTypCde} </if>
+		  		  <if test="payChlCde != null and payChlCde != ''"> and pay_chl_cde = #{payChlCde} </if>
+		  		  <if test="appIdnSky != null and appIdnSky != ''"> and app_idn_sky = #{appIdnSky} </if>
+		  		  <if test="dlyTxn1Amt != null and dlyTxn1Amt != ''"> and dly_txn_1_amt = #{dlyTxn1Amt} </if>
+		  		  <if test="mthTxn1Amt != null and mthTxn1Amt != ''"> and mth_txn_1_amt = #{mthTxn1Amt} </if>
+		  		  <if test="dlyTxn2Amt != null and dlyTxn2Amt != ''"> and dly_txn_2_amt = #{dlyTxn2Amt} </if>
+		  		  <if test="mthTxn2Amt != null and mthTxn2Amt != ''"> and mth_txn_2_amt = #{mthTxn2Amt} </if>
+		  		  <if test="lstTxnDte != null and lstTxnDte != ''"> and lst_txn_dte = #{lstTxnDte} </if>
+		  		  <if test="lstUpdDte != null and lstUpdDte != ''"> and lst_upd_dte = #{lstUpdDte} </if>
+		  		  <if test="lstUpdTme != null and lstUpdTme != ''"> and lst_upd_tme = #{lstUpdTme} </if>
+		  		  <if test="lstUpdUid != null and lstUpdUid != ''"> and lst_upd_uid = #{lstUpdUid} </if>
+		  		  <if test="lstUpdNbr != null and lstUpdNbr != ''"> and lst_upd_nbr = #{lstUpdNbr} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by pay_typ_cde desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from tb_tgen594
+		 <where>  
+		  		  <if test="payTypCde != null and payTypCde != ''"> and pay_typ_cde = #{payTypCde} </if>
+		  		  <if test="payChlCde != null and payChlCde != ''"> and pay_chl_cde = #{payChlCde} </if>
+		  		  <if test="appIdnSky != null and appIdnSky != ''"> and app_idn_sky = #{appIdnSky} </if>
+		  		  <if test="dlyTxn1Amt != null and dlyTxn1Amt != ''"> and dly_txn_1_amt = #{dlyTxn1Amt} </if>
+		  		  <if test="mthTxn1Amt != null and mthTxn1Amt != ''"> and mth_txn_1_amt = #{mthTxn1Amt} </if>
+		  		  <if test="dlyTxn2Amt != null and dlyTxn2Amt != ''"> and dly_txn_2_amt = #{dlyTxn2Amt} </if>
+		  		  <if test="mthTxn2Amt != null and mthTxn2Amt != ''"> and mth_txn_2_amt = #{mthTxn2Amt} </if>
+		  		  <if test="lstTxnDte != null and lstTxnDte != ''"> and lst_txn_dte = #{lstTxnDte} </if>
+		  		  <if test="lstUpdDte != null and lstUpdDte != ''"> and lst_upd_dte = #{lstUpdDte} </if>
+		  		  <if test="lstUpdTme != null and lstUpdTme != ''"> and lst_upd_tme = #{lstUpdTme} </if>
+		  		  <if test="lstUpdUid != null and lstUpdUid != ''"> and lst_upd_uid = #{lstUpdUid} </if>
+		  		  <if test="lstUpdNbr != null and lstUpdNbr != ''"> and lst_upd_nbr = #{lstUpdNbr} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.ccaf.domain.Tgen594DO">
+		insert into tb_tgen594
+		(
+			`pay_typ_cde`, 
+			`pay_chl_cde`, 
+			`app_idn_sky`, 
+			`dly_txn_1_amt`, 
+			`mth_txn_1_amt`, 
+			`dly_txn_2_amt`, 
+			`mth_txn_2_amt`, 
+			`lst_txn_dte`, 
+			`lst_upd_dte`, 
+			`lst_upd_tme`, 
+			`lst_upd_uid`, 
+			`lst_upd_nbr`
+		)
+		values
+		(
+			#{payTypCde}, 
+			#{payChlCde}, 
+			#{appIdnSky}, 
+			#{dlyTxn1Amt}, 
+			#{mthTxn1Amt}, 
+			#{dlyTxn2Amt}, 
+			#{mthTxn2Amt}, 
+			#{lstTxnDte}, 
+			#{lstUpdDte}, 
+			#{lstUpdTme}, 
+			#{lstUpdUid}, 
+			#{lstUpdNbr}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.ccaf.domain.Tgen594DO">
+		update tb_tgen594 
+		<set>
+			<if test="payChlCde != null">`pay_chl_cde` = #{payChlCde}, </if>
+			<if test="appIdnSky != null">`app_idn_sky` = #{appIdnSky}, </if>
+			<if test="dlyTxn1Amt != null">`dly_txn_1_amt` = #{dlyTxn1Amt}, </if>
+			<if test="mthTxn1Amt != null">`mth_txn_1_amt` = #{mthTxn1Amt}, </if>
+			<if test="dlyTxn2Amt != null">`dly_txn_2_amt` = #{dlyTxn2Amt}, </if>
+			<if test="mthTxn2Amt != null">`mth_txn_2_amt` = #{mthTxn2Amt}, </if>
+			<if test="lstTxnDte != null">`lst_txn_dte` = #{lstTxnDte}, </if>
+			<if test="lstUpdDte != null">`lst_upd_dte` = #{lstUpdDte}, </if>
+			<if test="lstUpdTme != null">`lst_upd_tme` = #{lstUpdTme}, </if>
+			<if test="lstUpdUid != null">`lst_upd_uid` = #{lstUpdUid}, </if>
+			<if test="lstUpdNbr != null">`lst_upd_nbr` = #{lstUpdNbr}</if>
+		</set>
+		where pay_typ_cde = #{payTypCde}
+	</update>
+	
+	<delete id="remove">
+		delete from tb_tgen594 where pay_typ_cde = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from tb_tgen594 where pay_typ_cde in 
+		<foreach item="payTypCde" collection="array" open="(" separator="," close=")">
+			#{payTypCde}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccaf.dao.DictDao">
+
+	<select id="get" resultType="com.ccaf.domain.DictDO">
+		select
+		`id`,`name`,`value`,`type`,`description`,`sort`,`parent_id`,`create_by`,`create_date`,`update_by`,`update_date`,`remarks`,`del_flag`
+		from sys_dict where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.ccaf.domain.DictDO">
+		select
+		`id`,`name`,`value`,`type`,`description`,`sort`,`parent_id`,`create_by`,`create_date`,`update_by`,`update_date`,`remarks`,`del_flag`
+		from sys_dict
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="name != null and name != ''"> and name = #{name} </if>
+			<if test="value != null and value != ''"> and value = #{value} </if>
+			<if test="type != null and type != ''"> and type = #{type} </if>
+			<if test="description != null and description != ''"> and description = #{description} </if>
+			<if test="sort != null and sort != ''"> and sort = #{sort} </if>
+			<if test="parentId != null and parentId != ''or parentId == 0 "> and parent_id = #{parentId} </if>
+			<if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+			<if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+			<if test="updateBy != null and updateBy != ''"> and update_by = #{updateBy} </if>
+			<if test="updateDate != null and updateDate != ''"> and update_date = #{updateDate} </if>
+			<if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
+			<if test="delFlag != null and delFlag != ''"> and del_flag = #{delFlag} </if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<when test="type != null and type.trim() == 'project_landmark'.toString()">
+				order by sort
+			</when>
+			<otherwise>
+				order by id
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="count" resultType="int">
+		select count(*) from sys_dict
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="name != null and name != ''"> and name = #{name} </if>
+			<if test="value != null and value != ''"> and value = #{value} </if>
+			<if test="type != null and type != ''"> and type = #{type} </if>
+			<if test="description != null and description != ''"> and description = #{description} </if>
+			<if test="sort != null and sort != ''"> and sort = #{sort} </if>
+			<if test="parentId != null and parentId != ''"> and parent_id = #{parentId} </if>
+			<if test="createBy != null and createBy != ''"> and create_by = #{createBy} </if>
+			<if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+			<if test="updateBy != null and updateBy != ''"> and update_by = #{updateBy} </if>
+			<if test="updateDate != null and updateDate != ''"> and update_date = #{updateDate} </if>
+			<if test="remarks != null and remarks != ''"> and remarks = #{remarks} </if>
+			<if test="delFlag != null and delFlag != ''"> and del_flag = #{delFlag} </if>
+		</where>
+	</select>
+
+	<insert id="save" parameterType="com.ccaf.domain.DictDO"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into sys_dict
+		(
+		`name`,
+		`value`,
+		`type`,
+		`description`,
+		`sort`,
+		`parent_id`,
+		`create_by`,
+		`create_date`,
+		`update_by`,
+		`update_date`,
+		`remarks`,
+		`del_flag`
+		)
+		values
+		(
+		#{name},
+		#{value},
+		#{type},
+		#{description},
+		#{sort},
+		#{parentId},
+		#{createBy},
+		#{createDate},
+		#{updateBy},
+		#{updateDate},
+		#{remarks},
+		#{delFlag}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.ccaf.domain.DictDO">
+		update sys_dict
+		<set>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="value != null">`value` = #{value}, </if>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="description != null">`description` = #{description}, </if>
+			<if test="sort != null">`sort` = #{sort}, </if>
+			<if test="parentId != null">`parent_id` = #{parentId}, </if>
+			<if test="createBy != null">`create_by` = #{createBy}, </if>
+			<if test="createDate != null">`create_date` = #{createDate}, </if>
+			<if test="updateBy != null">`update_by` = #{updateBy}, </if>
+			<if test="updateDate != null">`update_date` = #{updateDate}, </if>
+			<if test="remarks != null">`remarks` = #{remarks}, </if>
+			<if test="delFlag != null">`del_flag` = #{delFlag}</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="remove">
+		delete from sys_dict where id = #{value}
+	</delete>
+
+	<delete id="batchRemove">
+		delete from sys_dict where id in
+		<foreach item="id" collection="array" open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+	<select id="listType" resultType="com.ccaf.domain.DictDO">
+		select distinct `type` , description from sys_dict
+	</select>
+
+	<select id="findNameByTypeAndValue" resultType="String">
+		SELECT d.`name` FROM `sys_dict` d WHERE d.type = #{type} AND d.`value` = #{value};
+	</select>
+
+	<select id="findValueByTypeAndName" resultType="String">
+		SELECT d.`value` FROM `sys_dict` d WHERE d.type = #{type} AND d.`name` = #{name};
+	</select>
+
+	<select id="queryBuildDetail" resultType="com.ccaf.domain.DictDO">
+		select *
+		   from sys_dict t
+		  where t.name = #{name}
+		    and t.type like 'building_type_%'
+	</select>
+	<select id="getProvince" resultType="java.util.HashMap">
+		SELECT provinceid as value,province as label,area FROM tb_province
+	</select>
+	<select id="getCity" resultType="java.util.HashMap">
+		SELECT cityid as value,city as label FROM tb_city where provinceid =#{provinceid}
+	</select>
+	<select id="getArea" resultType="java.lang.String">
+		SELECT area FROM tb_province where provinceid =#{value}
+	</select>
+	<select id="getCounty" resultType="java.util.HashMap">
+		SELECT areaid as value,area as label FROM tb_county where cityid =#{cityid}
+	</select>
+	<select id="findCityBycityid" resultType="String">
+		SELECT city  FROM tb_city where cityid =#{cityid}
+	</select>
+	<select id="findProvinceByprovinceid" resultType="String">
+		SELECT province  FROM tb_province where provinceid =#{provinceid}
+	</select>
+	<select id="findParentName" resultType="java.lang.String">
+		SELECT d.`name` FROM `sys_dict` d WHERE d.type = #{type} AND d.`value` = #{value} and d.`parent_id` = 0 ;
+	</select>
+	<select id="findParentValue" resultType="java.lang.String">
+		SELECT d.`value` FROM `sys_dict` d WHERE d.type = #{type} AND d.`name` = #{name} and d.`parent_id` = 0 ;
+	</select>
+	<select id="getProvinceCityAndCounty" resultType="java.util.HashMap">
+		SELECT t.province as province,  c.city as city, county.area as county FROM tb_province t
+		LEFT JOIN tb_city c ON t.provinceid = c.provinceid
+		LEFT JOIN tb_county county ON c.cityid = county.cityid
+		where t.provinceid = #{provinceid} and c.cityid = #{cityid} and county.areaid = #{countyid}
+	</select>
+
+	<select id="transferLocation" resultType="java.util.HashMap">
+		SELECT
+			t.province AS province,
+			<if test="cityid!=null and cityid!=''">
+				c.city AS city,
+			</if>
+			<if test="countyid!=null and countyid!=''">
+				ct.area AS area,
+			</if>
+			null AS ''
+		FROM
+			tb_province t
+		<if test="cityid!=null and cityid!=''">
+			LEFT JOIN tb_city c ON t.provinceid = c.provinceid
+		</if>
+		<if test="countyid!=null and countyid!=''">
+			LEFT JOIN tb_county ct ON c.cityid = ct.cityid
+		</if>
+		WHERE
+			t.provinceid = #{provinceid}
+			<if test="cityid!=null and cityid!=''">
+				and c.cityid = #{cityid}
+			</if>
+			<if test="countyid!=null and countyid!=''">
+				and ct.areaid = #{countyid}
+			</if>
+	</select>
+
+</mapper>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccaf.dao.AwaitqHistDao">
+
+	<select id="get" resultType="com.ccaf.domain.AwaitqHistDO">
+		select `pan_txt`,`lst_upd_ttp`,`txn_ttp`,`seq`,`sts_ind`,`atn_cde_txt`,`sys_mde_ind`,`aqr_itn_idn_nbr`,`fwd_itn_idn_nbr`,`sta_nbr`,`rtv_rfe_nbr_txt`,`gmt_dte_tme`,`msg_dta_txt`,`rty_cnt`,`atn_cde_txt_2`,`lst_upd_nbr`,`tran_code` from tb_awaitq_hist where pan_txt = #{value}
+	</select>
+
+	<select id="list" resultType="com.ccaf.domain.AwaitqHistDO">
+		select `pan_txt`,`lst_upd_ttp`,`txn_ttp`,`seq`,`sts_ind`,`atn_cde_txt`,`sys_mde_ind`,`aqr_itn_idn_nbr`,`fwd_itn_idn_nbr`,`sta_nbr`,`rtv_rfe_nbr_txt`,`gmt_dte_tme`,`msg_dta_txt`,`rty_cnt`,`atn_cde_txt_2`,`lst_upd_nbr`,`tran_code` from tb_awaitq_hist
+        <where>  
+		  		  <if test="panTxt != null and panTxt != ''"> and pan_txt = #{panTxt} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="txnTtp != null and txnTtp != ''"> and txn_ttp = #{txnTtp} </if>
+		  		  <if test="seq != null and seq != ''"> and seq = #{seq} </if>
+		  		  <if test="stsInd != null and stsInd != ''"> and sts_ind = #{stsInd} </if>
+		  		  <if test="atnCdeTxt != null and atnCdeTxt != ''"> and atn_cde_txt = #{atnCdeTxt} </if>
+		  		  <if test="sysMdeInd != null and sysMdeInd != ''"> and sys_mde_ind = #{sysMdeInd} </if>
+		  		  <if test="aqrItnIdnNbr != null and aqrItnIdnNbr != ''"> and aqr_itn_idn_nbr = #{aqrItnIdnNbr} </if>
+		  		  <if test="fwdItnIdnNbr != null and fwdItnIdnNbr != ''"> and fwd_itn_idn_nbr = #{fwdItnIdnNbr} </if>
+		  		  <if test="staNbr != null and staNbr != ''"> and sta_nbr = #{staNbr} </if>
+		  		  <if test="rtvRfeNbrTxt != null and rtvRfeNbrTxt != ''"> and rtv_rfe_nbr_txt = #{rtvRfeNbrTxt} </if>
+		  		  <if test="gmtDteTme != null and gmtDteTme != ''"> and gmt_dte_tme = #{gmtDteTme} </if>
+		  		  <if test="msgDtaTxt != null and msgDtaTxt != ''"> and msg_dta_txt = #{msgDtaTxt} </if>
+		  		  <if test="rtyCnt != null and rtyCnt != ''"> and rty_cnt = #{rtyCnt} </if>
+		  		  <if test="atnCdeTxt2 != null and atnCdeTxt2 != ''"> and atn_cde_txt_2 = #{atnCdeTxt2} </if>
+		  		  <if test="lstUpdNbr != null and lstUpdNbr != ''"> and lst_upd_nbr = #{lstUpdNbr} </if>
+		  		  <if test="tranCode != null and tranCode != ''"> and tran_code = #{tranCode} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by pan_txt desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from tb_awaitq_hist
+		 <where>  
+		  		  <if test="panTxt != null and panTxt != ''"> and pan_txt = #{panTxt} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="txnTtp != null and txnTtp != ''"> and txn_ttp = #{txnTtp} </if>
+		  		  <if test="seq != null and seq != ''"> and seq = #{seq} </if>
+		  		  <if test="stsInd != null and stsInd != ''"> and sts_ind = #{stsInd} </if>
+		  		  <if test="atnCdeTxt != null and atnCdeTxt != ''"> and atn_cde_txt = #{atnCdeTxt} </if>
+		  		  <if test="sysMdeInd != null and sysMdeInd != ''"> and sys_mde_ind = #{sysMdeInd} </if>
+		  		  <if test="aqrItnIdnNbr != null and aqrItnIdnNbr != ''"> and aqr_itn_idn_nbr = #{aqrItnIdnNbr} </if>
+		  		  <if test="fwdItnIdnNbr != null and fwdItnIdnNbr != ''"> and fwd_itn_idn_nbr = #{fwdItnIdnNbr} </if>
+		  		  <if test="staNbr != null and staNbr != ''"> and sta_nbr = #{staNbr} </if>
+		  		  <if test="rtvRfeNbrTxt != null and rtvRfeNbrTxt != ''"> and rtv_rfe_nbr_txt = #{rtvRfeNbrTxt} </if>
+		  		  <if test="gmtDteTme != null and gmtDteTme != ''"> and gmt_dte_tme = #{gmtDteTme} </if>
+		  		  <if test="msgDtaTxt != null and msgDtaTxt != ''"> and msg_dta_txt = #{msgDtaTxt} </if>
+		  		  <if test="rtyCnt != null and rtyCnt != ''"> and rty_cnt = #{rtyCnt} </if>
+		  		  <if test="atnCdeTxt2 != null and atnCdeTxt2 != ''"> and atn_cde_txt_2 = #{atnCdeTxt2} </if>
+		  		  <if test="lstUpdNbr != null and lstUpdNbr != ''"> and lst_upd_nbr = #{lstUpdNbr} </if>
+		  		  <if test="tranCode != null and tranCode != ''"> and tran_code = #{tranCode} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.ccaf.domain.AwaitqHistDO">
+		insert into tb_awaitq_hist
+		(
+			`pan_txt`, 
+			`lst_upd_ttp`, 
+			`txn_ttp`, 
+			`seq`, 
+			`sts_ind`, 
+			`atn_cde_txt`, 
+			`sys_mde_ind`, 
+			`aqr_itn_idn_nbr`, 
+			`fwd_itn_idn_nbr`, 
+			`sta_nbr`, 
+			`rtv_rfe_nbr_txt`, 
+			`gmt_dte_tme`, 
+			`msg_dta_txt`, 
+			`rty_cnt`, 
+			`atn_cde_txt_2`, 
+			`lst_upd_nbr`, 
+			`tran_code`
+		)
+		values
+		(
+			#{panTxt}, 
+			#{lstUpdTtp}, 
+			#{txnTtp}, 
+			#{seq}, 
+			#{stsInd}, 
+			#{atnCdeTxt}, 
+			#{sysMdeInd}, 
+			#{aqrItnIdnNbr}, 
+			#{fwdItnIdnNbr}, 
+			#{staNbr}, 
+			#{rtvRfeNbrTxt}, 
+			#{gmtDteTme}, 
+			#{msgDtaTxt}, 
+			#{rtyCnt}, 
+			#{atnCdeTxt2}, 
+			#{lstUpdNbr}, 
+			#{tranCode}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.ccaf.domain.AwaitqHistDO">
+		update tb_awaitq_hist 
+		<set>
+			<if test="lstUpdTtp != null">`lst_upd_ttp` = #{lstUpdTtp}, </if>
+			<if test="txnTtp != null">`txn_ttp` = #{txnTtp}, </if>
+			<if test="seq != null">`seq` = #{seq}, </if>
+			<if test="stsInd != null">`sts_ind` = #{stsInd}, </if>
+			<if test="atnCdeTxt != null">`atn_cde_txt` = #{atnCdeTxt}, </if>
+			<if test="sysMdeInd != null">`sys_mde_ind` = #{sysMdeInd}, </if>
+			<if test="aqrItnIdnNbr != null">`aqr_itn_idn_nbr` = #{aqrItnIdnNbr}, </if>
+			<if test="fwdItnIdnNbr != null">`fwd_itn_idn_nbr` = #{fwdItnIdnNbr}, </if>
+			<if test="staNbr != null">`sta_nbr` = #{staNbr}, </if>
+			<if test="rtvRfeNbrTxt != null">`rtv_rfe_nbr_txt` = #{rtvRfeNbrTxt}, </if>
+			<if test="gmtDteTme != null">`gmt_dte_tme` = #{gmtDteTme}, </if>
+			<if test="msgDtaTxt != null">`msg_dta_txt` = #{msgDtaTxt}, </if>
+			<if test="rtyCnt != null">`rty_cnt` = #{rtyCnt}, </if>
+			<if test="atnCdeTxt2 != null">`atn_cde_txt_2` = #{atnCdeTxt2}, </if>
+			<if test="lstUpdNbr != null">`lst_upd_nbr` = #{lstUpdNbr}, </if>
+			<if test="tranCode != null">`tran_code` = #{tranCode}</if>
+		</set>
+		where pan_txt = #{panTxt}
+	</update>
+	
+	<delete id="remove">
+		delete from tb_awaitq_hist where pan_txt = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from tb_awaitq_hist where pan_txt in 
+		<foreach item="panTxt" collection="array" open="(" separator="," close=")">
+			#{panTxt}
+		</foreach>
+	</delete>
+
+</mapper>

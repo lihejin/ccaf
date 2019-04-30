@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccaf.dao.PWlistmctDao">
+
+	<select id="get" resultType="com.ccaf.domain.PWlistmctDO">
+		select `mct_id`,`lst_upd_ttp`,`mct_id_flg`,`mct_nme`,`sts` from tb_p_wlistmct where mct_id = #{value}
+	</select>
+
+	<select id="list" resultType="com.ccaf.domain.PWlistmctDO">
+		select `mct_id`,`lst_upd_ttp`,`mct_id_flg`,`mct_nme`,`sts` from tb_p_wlistmct
+        <where>  
+		  		  <if test="mctId != null and mctId != ''"> and mct_id = #{mctId} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="mctIdFlg != null and mctIdFlg != ''"> and mct_id_flg = #{mctIdFlg} </if>
+		  		  <if test="mctNme != null and mctNme != ''"> and mct_nme = #{mctNme} </if>
+		  		  <if test="sts != null and sts != ''"> and sts = #{sts} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by mct_id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from tb_p_wlistmct
+		 <where>  
+		  		  <if test="mctId != null and mctId != ''"> and mct_id = #{mctId} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="mctIdFlg != null and mctIdFlg != ''"> and mct_id_flg = #{mctIdFlg} </if>
+		  		  <if test="mctNme != null and mctNme != ''"> and mct_nme = #{mctNme} </if>
+		  		  <if test="sts != null and sts != ''"> and sts = #{sts} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.ccaf.domain.PWlistmctDO">
+		insert into tb_p_wlistmct
+		(
+			`mct_id`, 
+			`lst_upd_ttp`, 
+			`mct_id_flg`, 
+			`mct_nme`, 
+			`sts`
+		)
+		values
+		(
+			#{mctId}, 
+			#{lstUpdTtp}, 
+			#{mctIdFlg}, 
+			#{mctNme}, 
+			#{sts}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.ccaf.domain.PWlistmctDO">
+		update tb_p_wlistmct 
+		<set>
+			<if test="lstUpdTtp != null">`lst_upd_ttp` = #{lstUpdTtp}, </if>
+			<if test="mctIdFlg != null">`mct_id_flg` = #{mctIdFlg}, </if>
+			<if test="mctNme != null">`mct_nme` = #{mctNme}, </if>
+			<if test="sts != null">`sts` = #{sts}</if>
+		</set>
+		where mct_id = #{mctId}
+	</update>
+	
+	<delete id="remove">
+		delete from tb_p_wlistmct where mct_id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from tb_p_wlistmct where mct_id in 
+		<foreach item="mctId" collection="array" open="(" separator="," close=")">
+			#{mctId}
+		</foreach>
+	</delete>
+
+</mapper>

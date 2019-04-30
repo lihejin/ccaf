@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccaf.dao.TxndefineDao">
+
+	<select id="get" resultType="com.ccaf.domain.TxndefineDO">
+		select `txn_cde`,`lst_upd_ttp`,`txn_nme`,`hgh_rsk_flg`,`sts` from tb_txndefine where txn_cde = #{value}
+	</select>
+
+	<select id="list" resultType="com.ccaf.domain.TxndefineDO">
+		select `txn_cde`,`lst_upd_ttp`,`txn_nme`,`hgh_rsk_flg`,`sts` from tb_txndefine
+        <where>  
+		  		  <if test="txnCde != null and txnCde != ''"> and txn_cde = #{txnCde} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="txnNme != null and txnNme != ''"> and txn_nme = #{txnNme} </if>
+		  		  <if test="hghRskFlg != null and hghRskFlg != ''"> and hgh_rsk_flg = #{hghRskFlg} </if>
+		  		  <if test="sts != null and sts != ''"> and sts = #{sts} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by txn_cde desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from tb_txndefine
+		 <where>  
+		  		  <if test="txnCde != null and txnCde != ''"> and txn_cde = #{txnCde} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="txnNme != null and txnNme != ''"> and txn_nme = #{txnNme} </if>
+		  		  <if test="hghRskFlg != null and hghRskFlg != ''"> and hgh_rsk_flg = #{hghRskFlg} </if>
+		  		  <if test="sts != null and sts != ''"> and sts = #{sts} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.ccaf.domain.TxndefineDO">
+		insert into tb_txndefine
+		(
+			`txn_cde`, 
+			`lst_upd_ttp`, 
+			`txn_nme`, 
+			`hgh_rsk_flg`, 
+			`sts`
+		)
+		values
+		(
+			#{txnCde}, 
+			#{lstUpdTtp}, 
+			#{txnNme}, 
+			#{hghRskFlg}, 
+			#{sts}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.ccaf.domain.TxndefineDO">
+		update tb_txndefine 
+		<set>
+			<if test="lstUpdTtp != null">`lst_upd_ttp` = #{lstUpdTtp}, </if>
+			<if test="txnNme != null">`txn_nme` = #{txnNme}, </if>
+			<if test="hghRskFlg != null">`hgh_rsk_flg` = #{hghRskFlg}, </if>
+			<if test="sts != null">`sts` = #{sts}</if>
+		</set>
+		where txn_cde = #{txnCde}
+	</update>
+	
+	<delete id="remove">
+		delete from tb_txndefine where txn_cde = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from tb_txndefine where txn_cde in 
+		<foreach item="txnCde" collection="array" open="(" separator="," close=")">
+			#{txnCde}
+		</foreach>
+	</delete>
+
+</mapper>

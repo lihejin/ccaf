@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccaf.dao.Tgen597Dao">
+
+	<select id="get" resultType="com.ccaf.domain.Tgen597DO">
+		select `id_code`,`lst_upd_ttp`,`cert_type_code`,`pty_country_code` from tb_tgen597 where id_code = #{value}
+	</select>
+
+	<select id="list" resultType="com.ccaf.domain.Tgen597DO">
+		select `id_code`,`lst_upd_ttp`,`cert_type_code`,`pty_country_code` from tb_tgen597
+        <where>  
+		  		  <if test="idCode != null and idCode != ''"> and id_code = #{idCode} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="certTypeCode != null and certTypeCode != ''"> and cert_type_code = #{certTypeCode} </if>
+		  		  <if test="ptyCountryCode != null and ptyCountryCode != ''"> and pty_country_code = #{ptyCountryCode} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id_code desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from tb_tgen597
+		 <where>  
+		  		  <if test="idCode != null and idCode != ''"> and id_code = #{idCode} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="certTypeCode != null and certTypeCode != ''"> and cert_type_code = #{certTypeCode} </if>
+		  		  <if test="ptyCountryCode != null and ptyCountryCode != ''"> and pty_country_code = #{ptyCountryCode} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.ccaf.domain.Tgen597DO">
+		insert into tb_tgen597
+		(
+			`id_code`, 
+			`lst_upd_ttp`, 
+			`cert_type_code`, 
+			`pty_country_code`
+		)
+		values
+		(
+			#{idCode}, 
+			#{lstUpdTtp}, 
+			#{certTypeCode}, 
+			#{ptyCountryCode}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.ccaf.domain.Tgen597DO">
+		update tb_tgen597 
+		<set>
+			<if test="lstUpdTtp != null">`lst_upd_ttp` = #{lstUpdTtp}, </if>
+			<if test="certTypeCode != null">`cert_type_code` = #{certTypeCode}, </if>
+			<if test="ptyCountryCode != null">`pty_country_code` = #{ptyCountryCode}</if>
+		</set>
+		where id_code = #{idCode}
+	</update>
+	
+	<delete id="remove">
+		delete from tb_tgen597 where id_code = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from tb_tgen597 where id_code in 
+		<foreach item="idCode" collection="array" open="(" separator="," close=")">
+			#{idCode}
+		</foreach>
+	</delete>
+
+</mapper>

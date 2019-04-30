@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccaf.dao.Tgen065Dao">
+
+	<select id="get" resultType="com.ccaf.domain.Tgen065DO">
+		select `rfe_typ_idn_cde`,`lst_upd_ttp`,`rfe_val_idn_cde`,`dft_ind`,`tln_val_cde`,`atv_ind`,`lst_upd_usr` from tb_tgen065 where rfe_typ_idn_cde = #{value}
+	</select>
+
+	<select id="list" resultType="com.ccaf.domain.Tgen065DO">
+		select `rfe_typ_idn_cde`,`lst_upd_ttp`,`rfe_val_idn_cde`,`dft_ind`,`tln_val_cde`,`atv_ind`,`lst_upd_usr` from tb_tgen065
+        <where>  
+		  		  <if test="rfeTypIdnCde != null and rfeTypIdnCde != ''"> and rfe_typ_idn_cde = #{rfeTypIdnCde} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="rfeValIdnCde != null and rfeValIdnCde != ''"> and rfe_val_idn_cde = #{rfeValIdnCde} </if>
+		  		  <if test="dftInd != null and dftInd != ''"> and dft_ind = #{dftInd} </if>
+		  		  <if test="tlnValCde != null and tlnValCde != ''"> and tln_val_cde = #{tlnValCde} </if>
+		  		  <if test="atvInd != null and atvInd != ''"> and atv_ind = #{atvInd} </if>
+		  		  <if test="lstUpdUsr != null and lstUpdUsr != ''"> and lst_upd_usr = #{lstUpdUsr} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by rfe_typ_idn_cde desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from tb_tgen065
+		 <where>  
+		  		  <if test="rfeTypIdnCde != null and rfeTypIdnCde != ''"> and rfe_typ_idn_cde = #{rfeTypIdnCde} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="rfeValIdnCde != null and rfeValIdnCde != ''"> and rfe_val_idn_cde = #{rfeValIdnCde} </if>
+		  		  <if test="dftInd != null and dftInd != ''"> and dft_ind = #{dftInd} </if>
+		  		  <if test="tlnValCde != null and tlnValCde != ''"> and tln_val_cde = #{tlnValCde} </if>
+		  		  <if test="atvInd != null and atvInd != ''"> and atv_ind = #{atvInd} </if>
+		  		  <if test="lstUpdUsr != null and lstUpdUsr != ''"> and lst_upd_usr = #{lstUpdUsr} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.ccaf.domain.Tgen065DO">
+		insert into tb_tgen065
+		(
+			`rfe_typ_idn_cde`, 
+			`lst_upd_ttp`, 
+			`rfe_val_idn_cde`, 
+			`dft_ind`, 
+			`tln_val_cde`, 
+			`atv_ind`, 
+			`lst_upd_usr`
+		)
+		values
+		(
+			#{rfeTypIdnCde}, 
+			#{lstUpdTtp}, 
+			#{rfeValIdnCde}, 
+			#{dftInd}, 
+			#{tlnValCde}, 
+			#{atvInd}, 
+			#{lstUpdUsr}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.ccaf.domain.Tgen065DO">
+		update tb_tgen065 
+		<set>
+			<if test="lstUpdTtp != null">`lst_upd_ttp` = #{lstUpdTtp}, </if>
+			<if test="rfeValIdnCde != null">`rfe_val_idn_cde` = #{rfeValIdnCde}, </if>
+			<if test="dftInd != null">`dft_ind` = #{dftInd}, </if>
+			<if test="tlnValCde != null">`tln_val_cde` = #{tlnValCde}, </if>
+			<if test="atvInd != null">`atv_ind` = #{atvInd}, </if>
+			<if test="lstUpdUsr != null">`lst_upd_usr` = #{lstUpdUsr}</if>
+		</set>
+		where rfe_typ_idn_cde = #{rfeTypIdnCde}
+	</update>
+	
+	<delete id="remove">
+		delete from tb_tgen065 where rfe_typ_idn_cde = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from tb_tgen065 where rfe_typ_idn_cde in 
+		<foreach item="rfeTypIdnCde" collection="array" open="(" separator="," close=")">
+			#{rfeTypIdnCde}
+		</foreach>
+	</delete>
+
+</mapper>

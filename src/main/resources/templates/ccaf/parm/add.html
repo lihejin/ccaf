@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">lst_upd_ttp：</label>
+								<div class="col-sm-8">
+									<input id="lstUpdTtp" name="lstUpdTtp" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">prm_cde：</label>
+								<div class="col-sm-8">
+									<input id="prmCde" name="prmCde" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">prm_des：</label>
+								<div class="col-sm-8">
+									<input id="prmDes" name="prmDes" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">atv_ind：</label>
+								<div class="col-sm-8">
+									<input id="atvInd" name="atvInd" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">stw：</label>
+								<div class="col-sm-8">
+									<input id="stw" name="stw" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">lst_upd_usr：</label>
+								<div class="col-sm-8">
+									<input id="lstUpdUsr" name="lstUpdUsr" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/ccaf/parm/add.js">
+	</script>
+</body>
+</html>

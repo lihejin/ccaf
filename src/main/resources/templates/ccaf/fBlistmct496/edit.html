@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="net_typ" name="net_typ" th:value="${fBlistmct496.net_typ}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">lst_upd_ttp：</label>
+								<div class="col-sm-8">
+									<input id="lstUpdTtp" name="lstUpdTtp" th:value="${fBlistmct496.lstUpdTtp}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">frd_mch_cde：</label>
+								<div class="col-sm-8">
+									<input id="frdMchCde" name="frdMchCde" th:value="${fBlistmct496.frdMchCde}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">lv2_mch_cde：</label>
+								<div class="col-sm-8">
+									<input id="lv2MchCde" name="lv2MchCde" th:value="${fBlistmct496.lv2MchCde}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">atv_ind：</label>
+								<div class="col-sm-8">
+									<input id="atvInd" name="atvInd" th:value="${fBlistmct496.atvInd}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">dbt_ind：</label>
+								<div class="col-sm-8">
+									<input id="dbtInd" name="dbtInd" th:value="${fBlistmct496.dbtInd}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">crt_ind：</label>
+								<div class="col-sm-8">
+									<input id="crtInd" name="crtInd" th:value="${fBlistmct496.crtInd}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/ccaf/fBlistmct496/edit.js">
+	</script>
+</body>
+</html>

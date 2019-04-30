@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccaf.dao.ParmTypeDao">
+
+	<select id="get" resultType="com.ccaf.domain.ParmTypeDO">
+		select `prm_typ_cde`,`lst_upd_ttp`,`prm_typ_des`,`lst_upd_usr` from tb_parm_type where prm_typ_cde = #{value}
+	</select>
+
+	<select id="list" resultType="com.ccaf.domain.ParmTypeDO">
+		select `prm_typ_cde`,`lst_upd_ttp`,`prm_typ_des`,`lst_upd_usr` from tb_parm_type
+        <where>  
+		  		  <if test="prmTypCde != null and prmTypCde != ''"> and prm_typ_cde = #{prmTypCde} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="prmTypDes != null and prmTypDes != ''"> and prm_typ_des = #{prmTypDes} </if>
+		  		  <if test="lstUpdUsr != null and lstUpdUsr != ''"> and lst_upd_usr = #{lstUpdUsr} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by prm_typ_cde desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from tb_parm_type
+		 <where>  
+		  		  <if test="prmTypCde != null and prmTypCde != ''"> and prm_typ_cde = #{prmTypCde} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="prmTypDes != null and prmTypDes != ''"> and prm_typ_des = #{prmTypDes} </if>
+		  		  <if test="lstUpdUsr != null and lstUpdUsr != ''"> and lst_upd_usr = #{lstUpdUsr} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.ccaf.domain.ParmTypeDO">
+		insert into tb_parm_type
+		(
+			`prm_typ_cde`, 
+			`lst_upd_ttp`, 
+			`prm_typ_des`, 
+			`lst_upd_usr`
+		)
+		values
+		(
+			#{prmTypCde}, 
+			#{lstUpdTtp}, 
+			#{prmTypDes}, 
+			#{lstUpdUsr}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.ccaf.domain.ParmTypeDO">
+		update tb_parm_type 
+		<set>
+			<if test="lstUpdTtp != null">`lst_upd_ttp` = #{lstUpdTtp}, </if>
+			<if test="prmTypDes != null">`prm_typ_des` = #{prmTypDes}, </if>
+			<if test="lstUpdUsr != null">`lst_upd_usr` = #{lstUpdUsr}</if>
+		</set>
+		where prm_typ_cde = #{prmTypCde}
+	</update>
+	
+	<delete id="remove">
+		delete from tb_parm_type where prm_typ_cde = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from tb_parm_type where prm_typ_cde in 
+		<foreach item="prmTypCde" collection="array" open="(" separator="," close=")">
+			#{prmTypCde}
+		</foreach>
+	</delete>
+
+</mapper>
