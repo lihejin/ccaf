@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccaf.dao.TopactDao">
+
+	<select id="get" resultType="com.ccaf.domain.TopactDO">
+		select `act_idn_sky`,`lst_upd_ttp`,`csh_in_ind`,`ave_bal_amt`,`ttps`,`lst_upd_nbr`,`risk_stop_flg` from tb_topact where act_idn_sky = #{value}
+	</select>
+
+	<select id="list" resultType="com.ccaf.domain.TopactDO">
+		select `act_idn_sky`,`lst_upd_ttp`,`csh_in_ind`,`ave_bal_amt`,`ttps`,`lst_upd_nbr`,`risk_stop_flg` from tb_topact
+        <where>  
+		  		  <if test="actIdnSky != null and actIdnSky != ''"> and act_idn_sky = #{actIdnSky} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="cshInInd != null and cshInInd != ''"> and csh_in_ind = #{cshInInd} </if>
+		  		  <if test="aveBalAmt != null and aveBalAmt != ''"> and ave_bal_amt = #{aveBalAmt} </if>
+		  		  <if test="ttps != null and ttps != ''"> and ttps = #{ttps} </if>
+		  		  <if test="lstUpdNbr != null and lstUpdNbr != ''"> and lst_upd_nbr = #{lstUpdNbr} </if>
+		  		  <if test="riskStopFlg != null and riskStopFlg != ''"> and risk_stop_flg = #{riskStopFlg} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by act_idn_sky desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from tb_topact
+		 <where>  
+		  		  <if test="actIdnSky != null and actIdnSky != ''"> and act_idn_sky = #{actIdnSky} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="cshInInd != null and cshInInd != ''"> and csh_in_ind = #{cshInInd} </if>
+		  		  <if test="aveBalAmt != null and aveBalAmt != ''"> and ave_bal_amt = #{aveBalAmt} </if>
+		  		  <if test="ttps != null and ttps != ''"> and ttps = #{ttps} </if>
+		  		  <if test="lstUpdNbr != null and lstUpdNbr != ''"> and lst_upd_nbr = #{lstUpdNbr} </if>
+		  		  <if test="riskStopFlg != null and riskStopFlg != ''"> and risk_stop_flg = #{riskStopFlg} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.ccaf.domain.TopactDO">
+		insert into tb_topact
+		(
+			`act_idn_sky`, 
+			`lst_upd_ttp`, 
+			`csh_in_ind`, 
+			`ave_bal_amt`, 
+			`ttps`, 
+			`lst_upd_nbr`, 
+			`risk_stop_flg`
+		)
+		values
+		(
+			#{actIdnSky}, 
+			#{lstUpdTtp}, 
+			#{cshInInd}, 
+			#{aveBalAmt}, 
+			#{ttps}, 
+			#{lstUpdNbr}, 
+			#{riskStopFlg}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.ccaf.domain.TopactDO">
+		update tb_topact 
+		<set>
+			<if test="lstUpdTtp != null">`lst_upd_ttp` = #{lstUpdTtp}, </if>
+			<if test="cshInInd != null">`csh_in_ind` = #{cshInInd}, </if>
+			<if test="aveBalAmt != null">`ave_bal_amt` = #{aveBalAmt}, </if>
+			<if test="ttps != null">`ttps` = #{ttps}, </if>
+			<if test="lstUpdNbr != null">`lst_upd_nbr` = #{lstUpdNbr}, </if>
+			<if test="riskStopFlg != null">`risk_stop_flg` = #{riskStopFlg}</if>
+		</set>
+		where act_idn_sky = #{actIdnSky}
+	</update>
+	
+	<delete id="remove">
+		delete from tb_topact where act_idn_sky = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from tb_topact where act_idn_sky in 
+		<foreach item="actIdnSky" collection="array" open="(" separator="," close=")">
+			#{actIdnSky}
+		</foreach>
+	</delete>
+
+</mapper>

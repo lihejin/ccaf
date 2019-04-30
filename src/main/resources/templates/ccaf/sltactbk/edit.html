@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="act_idn_sky" name="act_idn_sky" th:value="${sltactbk.act_idn_sky}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">lst_upd_ttp：</label>
+								<div class="col-sm-8">
+									<input id="lstUpdTtp" name="lstUpdTtp" th:value="${sltactbk.lstUpdTtp}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">act_sts_cde：</label>
+								<div class="col-sm-8">
+									<input id="actStsCde" name="actStsCde" th:value="${sltactbk.actStsCde}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">rmb_slt_cdt_lmt_amt：</label>
+								<div class="col-sm-8">
+									<input id="rmbSltCdtLmtAmt" name="rmbSltCdtLmtAmt" th:value="${sltactbk.rmbSltCdtLmtAmt}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">rmb_slt_used_amt：</label>
+								<div class="col-sm-8">
+									<input id="rmbSltUsedAmt" name="rmbSltUsedAmt" th:value="${sltactbk.rmbSltUsedAmt}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">usd_slt_cdt_lmt_amt：</label>
+								<div class="col-sm-8">
+									<input id="usdSltCdtLmtAmt" name="usdSltCdtLmtAmt" th:value="${sltactbk.usdSltCdtLmtAmt}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">usd_slt_used_amt：</label>
+								<div class="col-sm-8">
+									<input id="usdSltUsedAmt" name="usdSltUsedAmt" th:value="${sltactbk.usdSltUsedAmt}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">ttps：</label>
+								<div class="col-sm-8">
+									<input id="ttps" name="ttps" th:value="${sltactbk.ttps}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">lst_upd_nbr：</label>
+								<div class="col-sm-8">
+									<input id="lstUpdNbr" name="lstUpdNbr" th:value="${sltactbk.lstUpdNbr}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">olt_ind：</label>
+								<div class="col-sm-8">
+									<input id="oltInd" name="oltInd" th:value="${sltactbk.oltInd}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/ccaf/sltactbk/edit.js">
+	</script>
+</body>
+</html>

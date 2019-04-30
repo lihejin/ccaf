@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccaf.domain.CustDao">
+
+	<select id="get" resultType="com.ccaf.domain.CustDO">
+		select `lst_upd_ttp`,`csr_idn_sky`,`csr_nme`,`scl_scy_typ_cde`,`scl_scy_nbr_txt`,`mob_phe_txt`,`lst_upd_nbr`,`ttps`,`agr_flg`,`cus_flg`,`anti_flg` from tb_cust where lst_upd_ttp = #{value}
+	</select>
+
+	<select id="list" resultType="com.ccaf.domain.CustDO">
+		select `lst_upd_ttp`,`csr_idn_sky`,`csr_nme`,`scl_scy_typ_cde`,`scl_scy_nbr_txt`,`mob_phe_txt`,`lst_upd_nbr`,`ttps`,`agr_flg`,`cus_flg`,`anti_flg` from tb_cust
+        <where>  
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="csrIdnSky != null and csrIdnSky != ''"> and csr_idn_sky = #{csrIdnSky} </if>
+		  		  <if test="csrNme != null and csrNme != ''"> and csr_nme = #{csrNme} </if>
+		  		  <if test="sclScyTypCde != null and sclScyTypCde != ''"> and scl_scy_typ_cde = #{sclScyTypCde} </if>
+		  		  <if test="sclScyNbrTxt != null and sclScyNbrTxt != ''"> and scl_scy_nbr_txt = #{sclScyNbrTxt} </if>
+		  		  <if test="mobPheTxt != null and mobPheTxt != ''"> and mob_phe_txt = #{mobPheTxt} </if>
+		  		  <if test="lstUpdNbr != null and lstUpdNbr != ''"> and lst_upd_nbr = #{lstUpdNbr} </if>
+		  		  <if test="ttps != null and ttps != ''"> and ttps = #{ttps} </if>
+		  		  <if test="agrFlg != null and agrFlg != ''"> and agr_flg = #{agrFlg} </if>
+		  		  <if test="cusFlg != null and cusFlg != ''"> and cus_flg = #{cusFlg} </if>
+		  		  <if test="antiFlg != null and antiFlg != ''"> and anti_flg = #{antiFlg} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by lst_upd_ttp desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from tb_cust
+		 <where>  
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="csrIdnSky != null and csrIdnSky != ''"> and csr_idn_sky = #{csrIdnSky} </if>
+		  		  <if test="csrNme != null and csrNme != ''"> and csr_nme = #{csrNme} </if>
+		  		  <if test="sclScyTypCde != null and sclScyTypCde != ''"> and scl_scy_typ_cde = #{sclScyTypCde} </if>
+		  		  <if test="sclScyNbrTxt != null and sclScyNbrTxt != ''"> and scl_scy_nbr_txt = #{sclScyNbrTxt} </if>
+		  		  <if test="mobPheTxt != null and mobPheTxt != ''"> and mob_phe_txt = #{mobPheTxt} </if>
+		  		  <if test="lstUpdNbr != null and lstUpdNbr != ''"> and lst_upd_nbr = #{lstUpdNbr} </if>
+		  		  <if test="ttps != null and ttps != ''"> and ttps = #{ttps} </if>
+		  		  <if test="agrFlg != null and agrFlg != ''"> and agr_flg = #{agrFlg} </if>
+		  		  <if test="cusFlg != null and cusFlg != ''"> and cus_flg = #{cusFlg} </if>
+		  		  <if test="antiFlg != null and antiFlg != ''"> and anti_flg = #{antiFlg} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.ccaf.domain.CustDO">
+		insert into tb_cust
+		(
+			`lst_upd_ttp`, 
+			`csr_idn_sky`, 
+			`csr_nme`, 
+			`scl_scy_typ_cde`, 
+			`scl_scy_nbr_txt`, 
+			`mob_phe_txt`, 
+			`lst_upd_nbr`, 
+			`ttps`, 
+			`agr_flg`, 
+			`cus_flg`, 
+			`anti_flg`
+		)
+		values
+		(
+			#{lstUpdTtp}, 
+			#{csrIdnSky}, 
+			#{csrNme}, 
+			#{sclScyTypCde}, 
+			#{sclScyNbrTxt}, 
+			#{mobPheTxt}, 
+			#{lstUpdNbr}, 
+			#{ttps}, 
+			#{agrFlg}, 
+			#{cusFlg}, 
+			#{antiFlg}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.ccaf.domain.CustDO">
+		update tb_cust 
+		<set>
+			<if test="csrIdnSky != null">`csr_idn_sky` = #{csrIdnSky}, </if>
+			<if test="csrNme != null">`csr_nme` = #{csrNme}, </if>
+			<if test="sclScyTypCde != null">`scl_scy_typ_cde` = #{sclScyTypCde}, </if>
+			<if test="sclScyNbrTxt != null">`scl_scy_nbr_txt` = #{sclScyNbrTxt}, </if>
+			<if test="mobPheTxt != null">`mob_phe_txt` = #{mobPheTxt}, </if>
+			<if test="lstUpdNbr != null">`lst_upd_nbr` = #{lstUpdNbr}, </if>
+			<if test="ttps != null">`ttps` = #{ttps}, </if>
+			<if test="agrFlg != null">`agr_flg` = #{agrFlg}, </if>
+			<if test="cusFlg != null">`cus_flg` = #{cusFlg}, </if>
+			<if test="antiFlg != null">`anti_flg` = #{antiFlg}</if>
+		</set>
+		where lst_upd_ttp = #{lstUpdTtp}
+	</update>
+	
+	<delete id="remove">
+		delete from tb_cust where lst_upd_ttp = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from tb_cust where lst_upd_ttp in 
+		<foreach item="lstUpdTtp" collection="array" open="(" separator="," close=")">
+			#{lstUpdTtp}
+		</foreach>
+	</delete>
+
+</mapper>

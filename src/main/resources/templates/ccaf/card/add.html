@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">pan_txt：</label>
+								<div class="col-sm-8">
+									<input id="panTxt" name="panTxt" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">app_ise_nbr：</label>
+								<div class="col-sm-8">
+									<input id="appIseNbr" name="appIseNbr" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">pdt_idn_cde：</label>
+								<div class="col-sm-8">
+									<input id="pdtIdnCde" name="pdtIdnCde" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">pla_sts_cde：</label>
+								<div class="col-sm-8">
+									<input id="plaStsCde" name="plaStsCde" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">end_ttp：</label>
+								<div class="col-sm-8">
+									<input id="endTtp" name="endTtp" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">cvv：</label>
+								<div class="col-sm-8">
+									<input id="cvv" name="cvv" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">cvv2：</label>
+								<div class="col-sm-8">
+									<input id="cvv2" name="cvv2" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">pin_oft：</label>
+								<div class="col-sm-8">
+									<input id="pinOft" name="pinOft" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">app_typ：</label>
+								<div class="col-sm-8">
+									<input id="appTyp" name="appTyp" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">pin_ver_pos_txn：</label>
+								<div class="col-sm-8">
+									<input id="pinVerPosTxn" name="pinVerPosTxn" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">cv2_rts_nbr：</label>
+								<div class="col-sm-8">
+									<input id="cv2RtsNbr" name="cv2RtsNbr" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">pin_rts_nbr：</label>
+								<div class="col-sm-8">
+									<input id="pinRtsNbr" name="pinRtsNbr" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">rts_nbr_dte：</label>
+								<div class="col-sm-8">
+									<input id="rtsNbrDte" name="rtsNbrDte" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">end_dte_rts_nbr：</label>
+								<div class="col-sm-8">
+									<input id="endDteRtsNbr" name="endDteRtsNbr" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">csr_rts_nbr：</label>
+								<div class="col-sm-8">
+									<input id="csrRtsNbr" name="csrRtsNbr" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">slt_act_idn_sky：</label>
+								<div class="col-sm-8">
+									<input id="sltActIdnSky" name="sltActIdnSky" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">top_act_idn_sky：</label>
+								<div class="col-sm-8">
+									<input id="topActIdnSky" name="topActIdnSky" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">csr_idn_sky：</label>
+								<div class="col-sm-8">
+									<input id="csrIdnSky" name="csrIdnSky" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">p_dly_vty_nbr_upl：</label>
+								<div class="col-sm-8">
+									<input id="pDlyVtyNbrUpl" name="pDlyVtyNbrUpl" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">p_dly_vty_amt_upl：</label>
+								<div class="col-sm-8">
+									<input id="pDlyVtyAmtUpl" name="pDlyVtyAmtUpl" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">p_dly_vty_tot_nbr：</label>
+								<div class="col-sm-8">
+									<input id="pDlyVtyTotNbr" name="pDlyVtyTotNbr" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">p_dly_vty_tot_amt：</label>
+								<div class="col-sm-8">
+									<input id="pDlyVtyTotAmt" name="pDlyVtyTotAmt" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">p_vty_upd_ttp：</label>
+								<div class="col-sm-8">
+									<input id="pVtyUpdTtp" name="pVtyUpdTtp" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">f_dly_vty_tot_nbr：</label>
+								<div class="col-sm-8">
+									<input id="fDlyVtyTotNbr" name="fDlyVtyTotNbr" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">f_dly_vty_tot_amt：</label>
+								<div class="col-sm-8">
+									<input id="fDlyVtyTotAmt" name="fDlyVtyTotAmt" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">f_vty_upd_ttp：</label>
+								<div class="col-sm-8">
+									<input id="fVtyUpdTtp" name="fVtyUpdTtp" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">ttps：</label>
+								<div class="col-sm-8">
+									<input id="ttps" name="ttps" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">lst_upd_nbr：</label>
+								<div class="col-sm-8">
+									<input id="lstUpdNbr" name="lstUpdNbr" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">app_idn_sky：</label>
+								<div class="col-sm-8">
+									<input id="appIdnSky" name="appIdnSky" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">man_act_ind：</label>
+								<div class="col-sm-8">
+									<input id="manActInd" name="manActInd" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">man_csr_idn_sky：</label>
+								<div class="col-sm-8">
+									<input id="manCsrIdnSky" name="manCsrIdnSky" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/card/add.js">
+	</script>
+</body>
+</html>

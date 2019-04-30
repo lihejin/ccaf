@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccaf.dao.NotifyDao">
+
+	<select id="get" resultType="com.ccaf.domain.NotifyDO">
+		select `id`,`content`,`status`,`link_address`,`title`,`type`,`channel_type`,`project_id`,
+			`create_time`,
+			`update_time`,
+			`create_user`,
+			`update_user`
+		from tb_notify where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.ccaf.domain.NotifyDO">
+		SELECT
+		(@rownum := @rownum +1)+(#{offset}) AS rowNum,
+		t.`id`,t.`content`,t.`status`,t.`link_address`,t.`title`,t.`type`
+		FROM
+		(SELECT
+		@rownum := 0) r,
+		tb_notify t join tb_notify_record tnr on t.id =tnr.notify_id
+		<where>
+		  		  <if test="id != null and id != ''"> and t.id = #{id} </if>
+		  		  <if test="content != null and content != ''"> and t.content = #{content} </if>
+		  		  <if test="status != null and status != ''"> and t.status = #{status} </if>
+		  		  <if test="linkAddress != null and linkAddress != ''"> and t.link_address = #{linkAddress} </if>
+		  		  <if test="title != null and title != ''"> and t.title = #{title} </if>
+		  		  <if test="type != null and type != ''"> and t.`type` = #{type} </if>
+		  		  <if test="projectId != null and projectId != ''"> and t.`project_id` = #{projectId} </if>
+			      <if test="userId != null and userId != ''"> and tnr.user_id = #{userId} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(1) from tb_notify t join tb_notify_record tnr on t.id =tnr.notify_id
+		 <where>  
+		  		  <if test="id != null and id != ''"> and t.id = #{id} </if>
+		  		  <if test="content != null and content != ''"> and t.content = #{content} </if>
+		  		  <if test="status != null and status != ''"> and t.status = #{status} </if>
+		  		  <if test="linkAddress != null and linkAddress != ''"> and t.link_address = #{linkAddress} </if>
+		  		  <if test="title != null and title != ''"> and t.title = #{title} </if>
+		  		  <if test="type != null and type != ''"> and t.type = #{type} </if>
+		  		  <if test="projectId != null and projectId != ''"> and t.project_id = #{projectId} </if>
+			      <if test="userId != null and userId != ''"> and tnr.user_id = #{userId} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.ccaf.domain.NotifyDO" useGeneratedKeys="true" keyProperty="id">
+		insert into tb_notify
+		(
+			`content`, 
+			`status`, 
+			`link_address`, 
+			`title`, 
+			`type`,
+			`channel_type`,
+			`create_time`,
+			`update_time`,
+			`create_user`,
+			`update_user`,
+			`project_id`
+		)
+		values
+		(
+			#{content}, 
+			#{status}, 
+			#{linkAddress}, 
+			#{title}, 
+			#{type},
+			#{channelType},
+			#{createTime},
+			#{updateTime},
+			#{createUser},
+			#{updateUser},
+			#{projectId}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.ccaf.domain.NotifyDO">
+		update tb_notify 
+		<set>
+			<if test="content != null">`content` = #{content}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="linkAddress != null">`link_address` = #{linkAddress}, </if>
+			<if test="title != null">`title` = #{title}, </if>
+			<if test="type != null">`type` = #{type},</if>
+			<if test="projectId != null">`project_id` = #{projectId}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from tb_notify where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from tb_notify where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+	<select id="listDTO" resultType="com.ccaf.domain.NotifyDTO">
+		select DISTINCT
+		n.id ,n.project_id,`type`,`title`,`content`,r.is_read,`status`,`link_address`
+		from tb_notify_record r right JOIN tb_notify n on r.notify_id = n.id
+		<where>
+			<if test="id != null and id != ''"> and r.id = #{id} </if>
+			<if test="notifyId != null and notifyId != ''"> and r.notify_id = #{notifyId} </if>
+			<if test="isRead != null and isRead != ''"> and r.is_read = #{isRead} </if>
+			<if test="status != null and status != ''"> and n.status = #{status} </if>
+			<if test="userId != null and userId != ''"> and r.user_id = #{userId} </if>
+			<if test="type != null and type != ''"> and n.type = #{type} </if>
+			<if test="readDate != null and readDate != ''"> and r.read_date = #{readDate} </if>
+			<if test="channel != null and channel != ''"> and r.channel = #{channel} </if>
+			<if test="projectId != null and projectId != ''"> and r.project_id = #{projectId} </if>
+		</where>
+		order by is_read ASC
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+
+	</select>
+	<select id="countDTO" resultType="int">
+		select count(*)
+		from
+		tb_notify_record r  right JOIN tb_notify n on r.notify_id = n.id
+		<where>
+			<if test="id != null and id != ''"> and r.id = #{id} </if>
+			<if test="notifyId != null and notifyId != ''"> and r.notify_id = #{notifyId} </if>
+			<if test="isRead != null and isRead != ''"> and r.is_read = #{isRead} </if>
+			<if test="userId != null and userId != ''"> and r.user_id = #{userId} </if>
+			<if test="type != null and type != ''"> and n.type = #{type} </if>
+			<if test="readDate != null and readDate != ''"> and r.read_date = #{readDate} </if>
+			<if test="channel != null and channel != ''"> and r.channel = #{channel} </if>
+			<if test="projectId != null and projectId != ''"> and r.project_id = #{projectId} </if>
+		</where>
+	</select>
+
+	<select id="prjLatestNotify" resultType="com.ccaf.domain.NotifyDTO">
+		SELECT
+		t.*,
+		p.project_name
+		FROM
+		tb_notify t
+		left join tb_project p on t.project_id = p.id
+		WHERE
+		t.project_id = #{projectId}
+		and t.type = '0'
+		ORDER BY
+		create_time DESC
+		LIMIT 0,
+		1
+	</select>
+
+	<select id="personLatestNotify" resultType="com.ccaf.domain.NotifyDTO">
+		SELECT
+			t.*,
+			p.project_name
+		FROM
+			tb_notify t
+		LEFT JOIN tb_notify_record nr ON nr.notify_id = t.id
+		left join  tb_project p on t.project_id = p.id
+		WHERE
+			t.type = #{type}
+		AND nr.user_id = #{userId}
+		ORDER BY
+			create_time DESC
+		LIMIT 0,
+		 1;
+	</select>
+</mapper>

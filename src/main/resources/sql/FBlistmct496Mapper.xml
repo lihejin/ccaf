@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccaf.dao.FBlistmct496Dao">
+
+	<select id="get" resultType="com.ccaf.domain.FBlistmct496DO">
+		select `net_typ`,`lst_upd_ttp`,`frd_mch_cde`,`lv2_mch_cde`,`atv_ind`,`dbt_ind`,`crt_ind` from tb_f_blistmct_496 where net_typ = #{value}
+	</select>
+
+	<select id="list" resultType="com.ccaf.domain.FBlistmct496DO">
+		select `net_typ`,`lst_upd_ttp`,`frd_mch_cde`,`lv2_mch_cde`,`atv_ind`,`dbt_ind`,`crt_ind` from tb_f_blistmct_496
+        <where>  
+		  		  <if test="netTyp != null and netTyp != ''"> and net_typ = #{netTyp} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="frdMchCde != null and frdMchCde != ''"> and frd_mch_cde = #{frdMchCde} </if>
+		  		  <if test="lv2MchCde != null and lv2MchCde != ''"> and lv2_mch_cde = #{lv2MchCde} </if>
+		  		  <if test="atvInd != null and atvInd != ''"> and atv_ind = #{atvInd} </if>
+		  		  <if test="dbtInd != null and dbtInd != ''"> and dbt_ind = #{dbtInd} </if>
+		  		  <if test="crtInd != null and crtInd != ''"> and crt_ind = #{crtInd} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by net_typ desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from tb_f_blistmct_496
+		 <where>  
+		  		  <if test="netTyp != null and netTyp != ''"> and net_typ = #{netTyp} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="frdMchCde != null and frdMchCde != ''"> and frd_mch_cde = #{frdMchCde} </if>
+		  		  <if test="lv2MchCde != null and lv2MchCde != ''"> and lv2_mch_cde = #{lv2MchCde} </if>
+		  		  <if test="atvInd != null and atvInd != ''"> and atv_ind = #{atvInd} </if>
+		  		  <if test="dbtInd != null and dbtInd != ''"> and dbt_ind = #{dbtInd} </if>
+		  		  <if test="crtInd != null and crtInd != ''"> and crt_ind = #{crtInd} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.ccaf.domain.FBlistmct496DO">
+		insert into tb_f_blistmct_496
+		(
+			`net_typ`, 
+			`lst_upd_ttp`, 
+			`frd_mch_cde`, 
+			`lv2_mch_cde`, 
+			`atv_ind`, 
+			`dbt_ind`, 
+			`crt_ind`
+		)
+		values
+		(
+			#{netTyp}, 
+			#{lstUpdTtp}, 
+			#{frdMchCde}, 
+			#{lv2MchCde}, 
+			#{atvInd}, 
+			#{dbtInd}, 
+			#{crtInd}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.ccaf.domain.FBlistmct496DO">
+		update tb_f_blistmct_496 
+		<set>
+			<if test="lstUpdTtp != null">`lst_upd_ttp` = #{lstUpdTtp}, </if>
+			<if test="frdMchCde != null">`frd_mch_cde` = #{frdMchCde}, </if>
+			<if test="lv2MchCde != null">`lv2_mch_cde` = #{lv2MchCde}, </if>
+			<if test="atvInd != null">`atv_ind` = #{atvInd}, </if>
+			<if test="dbtInd != null">`dbt_ind` = #{dbtInd}, </if>
+			<if test="crtInd != null">`crt_ind` = #{crtInd}</if>
+		</set>
+		where net_typ = #{netTyp}
+	</update>
+	
+	<delete id="remove">
+		delete from tb_f_blistmct_496 where net_typ = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from tb_f_blistmct_496 where net_typ in 
+		<foreach item="netTyp" collection="array" open="(" separator="," close=")">
+			#{netTyp}
+		</foreach>
+	</delete>
+
+</mapper>

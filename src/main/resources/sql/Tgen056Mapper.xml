@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccaf.dao.Tgen056Dao">
+
+	<select id="get" resultType="com.ccaf.domain.Tgen056DO">
+		select `itn_idn_cde`,`txn_cde`,`txn_typ_cde`,`ext_txn_cde`,`dbt_ext_txn_cde`,`dbt_cdt_cde`,`pre_pmt_ind`,`mch_tnc_pct`,`png_day_nbr`,`mxmday_pst_txn_nbr`,`lty_ind`,`rvs_txn_ind`,`txn_smt_otn_cde`,`csr_gtd_ind`,`mxm_ath_hld_nbr`,`scs_css_idn_cde`,`aff_rpt_css_cde`,`bkd_int_ind`,`dpd_ald_cde`,`lst_upd_dte`,`lst_upd_tme`,`lst_upd_uid`,`lst_upd_nbr` from tb_tgen056 where itn_idn_cde = #{value}
+	</select>
+
+	<select id="list" resultType="com.ccaf.domain.Tgen056DO">
+		select `itn_idn_cde`,`txn_cde`,`txn_typ_cde`,`ext_txn_cde`,`dbt_ext_txn_cde`,`dbt_cdt_cde`,`pre_pmt_ind`,`mch_tnc_pct`,`png_day_nbr`,`mxmday_pst_txn_nbr`,`lty_ind`,`rvs_txn_ind`,`txn_smt_otn_cde`,`csr_gtd_ind`,`mxm_ath_hld_nbr`,`scs_css_idn_cde`,`aff_rpt_css_cde`,`bkd_int_ind`,`dpd_ald_cde`,`lst_upd_dte`,`lst_upd_tme`,`lst_upd_uid`,`lst_upd_nbr` from tb_tgen056
+        <where>  
+		  		  <if test="itnIdnCde != null and itnIdnCde != ''"> and itn_idn_cde = #{itnIdnCde} </if>
+		  		  <if test="txnCde != null and txnCde != ''"> and txn_cde = #{txnCde} </if>
+		  		  <if test="txnTypCde != null and txnTypCde != ''"> and txn_typ_cde = #{txnTypCde} </if>
+		  		  <if test="extTxnCde != null and extTxnCde != ''"> and ext_txn_cde = #{extTxnCde} </if>
+		  		  <if test="dbtExtTxnCde != null and dbtExtTxnCde != ''"> and dbt_ext_txn_cde = #{dbtExtTxnCde} </if>
+		  		  <if test="dbtCdtCde != null and dbtCdtCde != ''"> and dbt_cdt_cde = #{dbtCdtCde} </if>
+		  		  <if test="prePmtInd != null and prePmtInd != ''"> and pre_pmt_ind = #{prePmtInd} </if>
+		  		  <if test="mchTncPct != null and mchTncPct != ''"> and mch_tnc_pct = #{mchTncPct} </if>
+		  		  <if test="pngDayNbr != null and pngDayNbr != ''"> and png_day_nbr = #{pngDayNbr} </if>
+		  		  <if test="mxmdayPstTxnNbr != null and mxmdayPstTxnNbr != ''"> and mxmday_pst_txn_nbr = #{mxmdayPstTxnNbr} </if>
+		  		  <if test="ltyInd != null and ltyInd != ''"> and lty_ind = #{ltyInd} </if>
+		  		  <if test="rvsTxnInd != null and rvsTxnInd != ''"> and rvs_txn_ind = #{rvsTxnInd} </if>
+		  		  <if test="txnSmtOtnCde != null and txnSmtOtnCde != ''"> and txn_smt_otn_cde = #{txnSmtOtnCde} </if>
+		  		  <if test="csrGtdInd != null and csrGtdInd != ''"> and csr_gtd_ind = #{csrGtdInd} </if>
+		  		  <if test="mxmAthHldNbr != null and mxmAthHldNbr != ''"> and mxm_ath_hld_nbr = #{mxmAthHldNbr} </if>
+		  		  <if test="scsCssIdnCde != null and scsCssIdnCde != ''"> and scs_css_idn_cde = #{scsCssIdnCde} </if>
+		  		  <if test="affRptCssCde != null and affRptCssCde != ''"> and aff_rpt_css_cde = #{affRptCssCde} </if>
+		  		  <if test="bkdIntInd != null and bkdIntInd != ''"> and bkd_int_ind = #{bkdIntInd} </if>
+		  		  <if test="dpdAldCde != null and dpdAldCde != ''"> and dpd_ald_cde = #{dpdAldCde} </if>
+		  		  <if test="lstUpdDte != null and lstUpdDte != ''"> and lst_upd_dte = #{lstUpdDte} </if>
+		  		  <if test="lstUpdTme != null and lstUpdTme != ''"> and lst_upd_tme = #{lstUpdTme} </if>
+		  		  <if test="lstUpdUid != null and lstUpdUid != ''"> and lst_upd_uid = #{lstUpdUid} </if>
+		  		  <if test="lstUpdNbr != null and lstUpdNbr != ''"> and lst_upd_nbr = #{lstUpdNbr} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by itn_idn_cde desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from tb_tgen056
+		 <where>  
+		  		  <if test="itnIdnCde != null and itnIdnCde != ''"> and itn_idn_cde = #{itnIdnCde} </if>
+		  		  <if test="txnCde != null and txnCde != ''"> and txn_cde = #{txnCde} </if>
+		  		  <if test="txnTypCde != null and txnTypCde != ''"> and txn_typ_cde = #{txnTypCde} </if>
+		  		  <if test="extTxnCde != null and extTxnCde != ''"> and ext_txn_cde = #{extTxnCde} </if>
+		  		  <if test="dbtExtTxnCde != null and dbtExtTxnCde != ''"> and dbt_ext_txn_cde = #{dbtExtTxnCde} </if>
+		  		  <if test="dbtCdtCde != null and dbtCdtCde != ''"> and dbt_cdt_cde = #{dbtCdtCde} </if>
+		  		  <if test="prePmtInd != null and prePmtInd != ''"> and pre_pmt_ind = #{prePmtInd} </if>
+		  		  <if test="mchTncPct != null and mchTncPct != ''"> and mch_tnc_pct = #{mchTncPct} </if>
+		  		  <if test="pngDayNbr != null and pngDayNbr != ''"> and png_day_nbr = #{pngDayNbr} </if>
+		  		  <if test="mxmdayPstTxnNbr != null and mxmdayPstTxnNbr != ''"> and mxmday_pst_txn_nbr = #{mxmdayPstTxnNbr} </if>
+		  		  <if test="ltyInd != null and ltyInd != ''"> and lty_ind = #{ltyInd} </if>
+		  		  <if test="rvsTxnInd != null and rvsTxnInd != ''"> and rvs_txn_ind = #{rvsTxnInd} </if>
+		  		  <if test="txnSmtOtnCde != null and txnSmtOtnCde != ''"> and txn_smt_otn_cde = #{txnSmtOtnCde} </if>
+		  		  <if test="csrGtdInd != null and csrGtdInd != ''"> and csr_gtd_ind = #{csrGtdInd} </if>
+		  		  <if test="mxmAthHldNbr != null and mxmAthHldNbr != ''"> and mxm_ath_hld_nbr = #{mxmAthHldNbr} </if>
+		  		  <if test="scsCssIdnCde != null and scsCssIdnCde != ''"> and scs_css_idn_cde = #{scsCssIdnCde} </if>
+		  		  <if test="affRptCssCde != null and affRptCssCde != ''"> and aff_rpt_css_cde = #{affRptCssCde} </if>
+		  		  <if test="bkdIntInd != null and bkdIntInd != ''"> and bkd_int_ind = #{bkdIntInd} </if>
+		  		  <if test="dpdAldCde != null and dpdAldCde != ''"> and dpd_ald_cde = #{dpdAldCde} </if>
+		  		  <if test="lstUpdDte != null and lstUpdDte != ''"> and lst_upd_dte = #{lstUpdDte} </if>
+		  		  <if test="lstUpdTme != null and lstUpdTme != ''"> and lst_upd_tme = #{lstUpdTme} </if>
+		  		  <if test="lstUpdUid != null and lstUpdUid != ''"> and lst_upd_uid = #{lstUpdUid} </if>
+		  		  <if test="lstUpdNbr != null and lstUpdNbr != ''"> and lst_upd_nbr = #{lstUpdNbr} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.ccaf.domain.Tgen056DO">
+		insert into tb_tgen056
+		(
+			`itn_idn_cde`, 
+			`txn_cde`, 
+			`txn_typ_cde`, 
+			`ext_txn_cde`, 
+			`dbt_ext_txn_cde`, 
+			`dbt_cdt_cde`, 
+			`pre_pmt_ind`, 
+			`mch_tnc_pct`, 
+			`png_day_nbr`, 
+			`mxmday_pst_txn_nbr`, 
+			`lty_ind`, 
+			`rvs_txn_ind`, 
+			`txn_smt_otn_cde`, 
+			`csr_gtd_ind`, 
+			`mxm_ath_hld_nbr`, 
+			`scs_css_idn_cde`, 
+			`aff_rpt_css_cde`, 
+			`bkd_int_ind`, 
+			`dpd_ald_cde`, 
+			`lst_upd_dte`, 
+			`lst_upd_tme`, 
+			`lst_upd_uid`, 
+			`lst_upd_nbr`
+		)
+		values
+		(
+			#{itnIdnCde}, 
+			#{txnCde}, 
+			#{txnTypCde}, 
+			#{extTxnCde}, 
+			#{dbtExtTxnCde}, 
+			#{dbtCdtCde}, 
+			#{prePmtInd}, 
+			#{mchTncPct}, 
+			#{pngDayNbr}, 
+			#{mxmdayPstTxnNbr}, 
+			#{ltyInd}, 
+			#{rvsTxnInd}, 
+			#{txnSmtOtnCde}, 
+			#{csrGtdInd}, 
+			#{mxmAthHldNbr}, 
+			#{scsCssIdnCde}, 
+			#{affRptCssCde}, 
+			#{bkdIntInd}, 
+			#{dpdAldCde}, 
+			#{lstUpdDte}, 
+			#{lstUpdTme}, 
+			#{lstUpdUid}, 
+			#{lstUpdNbr}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.ccaf.domain.Tgen056DO">
+		update tb_tgen056 
+		<set>
+			<if test="txnCde != null">`txn_cde` = #{txnCde}, </if>
+			<if test="txnTypCde != null">`txn_typ_cde` = #{txnTypCde}, </if>
+			<if test="extTxnCde != null">`ext_txn_cde` = #{extTxnCde}, </if>
+			<if test="dbtExtTxnCde != null">`dbt_ext_txn_cde` = #{dbtExtTxnCde}, </if>
+			<if test="dbtCdtCde != null">`dbt_cdt_cde` = #{dbtCdtCde}, </if>
+			<if test="prePmtInd != null">`pre_pmt_ind` = #{prePmtInd}, </if>
+			<if test="mchTncPct != null">`mch_tnc_pct` = #{mchTncPct}, </if>
+			<if test="pngDayNbr != null">`png_day_nbr` = #{pngDayNbr}, </if>
+			<if test="mxmdayPstTxnNbr != null">`mxmday_pst_txn_nbr` = #{mxmdayPstTxnNbr}, </if>
+			<if test="ltyInd != null">`lty_ind` = #{ltyInd}, </if>
+			<if test="rvsTxnInd != null">`rvs_txn_ind` = #{rvsTxnInd}, </if>
+			<if test="txnSmtOtnCde != null">`txn_smt_otn_cde` = #{txnSmtOtnCde}, </if>
+			<if test="csrGtdInd != null">`csr_gtd_ind` = #{csrGtdInd}, </if>
+			<if test="mxmAthHldNbr != null">`mxm_ath_hld_nbr` = #{mxmAthHldNbr}, </if>
+			<if test="scsCssIdnCde != null">`scs_css_idn_cde` = #{scsCssIdnCde}, </if>
+			<if test="affRptCssCde != null">`aff_rpt_css_cde` = #{affRptCssCde}, </if>
+			<if test="bkdIntInd != null">`bkd_int_ind` = #{bkdIntInd}, </if>
+			<if test="dpdAldCde != null">`dpd_ald_cde` = #{dpdAldCde}, </if>
+			<if test="lstUpdDte != null">`lst_upd_dte` = #{lstUpdDte}, </if>
+			<if test="lstUpdTme != null">`lst_upd_tme` = #{lstUpdTme}, </if>
+			<if test="lstUpdUid != null">`lst_upd_uid` = #{lstUpdUid}, </if>
+			<if test="lstUpdNbr != null">`lst_upd_nbr` = #{lstUpdNbr}</if>
+		</set>
+		where itn_idn_cde = #{itnIdnCde}
+	</update>
+	
+	<delete id="remove">
+		delete from tb_tgen056 where itn_idn_cde = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from tb_tgen056 where itn_idn_cde in 
+		<foreach item="itnIdnCde" collection="array" open="(" separator="," close=")">
+			#{itnIdnCde}
+		</foreach>
+	</delete>
+
+</mapper>

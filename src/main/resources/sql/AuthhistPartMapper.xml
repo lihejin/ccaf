@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccaf.dao.AuthhistPartDao">
+
+	<select id="get" resultType="com.ccaf.domain.AuthhistPartDO">
+		select `pan_txt`,`lst_upd_ttp`,`txt_ttp`,`seq`,`sys_mde_ind`,`pcs_sys_ind`,`msg_dta_txt` from tb_authhist_part where pan_txt = #{value}
+	</select>
+
+	<select id="list" resultType="com.ccaf.domain.AuthhistPartDO">
+		select `pan_txt`,`lst_upd_ttp`,`txt_ttp`,`seq`,`sys_mde_ind`,`pcs_sys_ind`,`msg_dta_txt` from tb_authhist_part
+        <where>  
+		  		  <if test="panTxt != null and panTxt != ''"> and pan_txt = #{panTxt} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="txtTtp != null and txtTtp != ''"> and txt_ttp = #{txtTtp} </if>
+		  		  <if test="seq != null and seq != ''"> and seq = #{seq} </if>
+		  		  <if test="sysMdeInd != null and sysMdeInd != ''"> and sys_mde_ind = #{sysMdeInd} </if>
+		  		  <if test="pcsSysInd != null and pcsSysInd != ''"> and pcs_sys_ind = #{pcsSysInd} </if>
+		  		  <if test="msgDtaTxt != null and msgDtaTxt != ''"> and msg_dta_txt = #{msgDtaTxt} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by pan_txt desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from tb_authhist_part
+		 <where>  
+		  		  <if test="panTxt != null and panTxt != ''"> and pan_txt = #{panTxt} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="txtTtp != null and txtTtp != ''"> and txt_ttp = #{txtTtp} </if>
+		  		  <if test="seq != null and seq != ''"> and seq = #{seq} </if>
+		  		  <if test="sysMdeInd != null and sysMdeInd != ''"> and sys_mde_ind = #{sysMdeInd} </if>
+		  		  <if test="pcsSysInd != null and pcsSysInd != ''"> and pcs_sys_ind = #{pcsSysInd} </if>
+		  		  <if test="msgDtaTxt != null and msgDtaTxt != ''"> and msg_dta_txt = #{msgDtaTxt} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.ccaf.domain.AuthhistPartDO">
+		insert into tb_authhist_part
+		(
+			`pan_txt`, 
+			`lst_upd_ttp`, 
+			`txt_ttp`, 
+			`seq`, 
+			`sys_mde_ind`, 
+			`pcs_sys_ind`, 
+			`msg_dta_txt`
+		)
+		values
+		(
+			#{panTxt}, 
+			#{lstUpdTtp}, 
+			#{txtTtp}, 
+			#{seq}, 
+			#{sysMdeInd}, 
+			#{pcsSysInd}, 
+			#{msgDtaTxt}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.ccaf.domain.AuthhistPartDO">
+		update tb_authhist_part 
+		<set>
+			<if test="lstUpdTtp != null">`lst_upd_ttp` = #{lstUpdTtp}, </if>
+			<if test="txtTtp != null">`txt_ttp` = #{txtTtp}, </if>
+			<if test="seq != null">`seq` = #{seq}, </if>
+			<if test="sysMdeInd != null">`sys_mde_ind` = #{sysMdeInd}, </if>
+			<if test="pcsSysInd != null">`pcs_sys_ind` = #{pcsSysInd}, </if>
+			<if test="msgDtaTxt != null">`msg_dta_txt` = #{msgDtaTxt}</if>
+		</set>
+		where pan_txt = #{panTxt}
+	</update>
+	
+	<delete id="remove">
+		delete from tb_authhist_part where pan_txt = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from tb_authhist_part where pan_txt in 
+		<foreach item="panTxt" collection="array" open="(" separator="," close=")">
+			#{panTxt}
+		</foreach>
+	</delete>
+
+</mapper>

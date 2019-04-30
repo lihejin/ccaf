@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccaf.dao.Tgen599Dao">
+
+	<select id="get" resultType="com.ccaf.domain.Tgen599DO">
+		select `app_idn_sky`,`dly_txn_amt`,`avn_ind`,`lst_upd_dte`,`lst_upd_tme`,`lst_upd_uid`,`lst_upd_nbr` from tb_tgen599 where app_idn_sky = #{value}
+	</select>
+
+	<select id="list" resultType="com.ccaf.domain.Tgen599DO">
+		select `app_idn_sky`,`dly_txn_amt`,`avn_ind`,`lst_upd_dte`,`lst_upd_tme`,`lst_upd_uid`,`lst_upd_nbr` from tb_tgen599
+        <where>  
+		  		  <if test="appIdnSky != null and appIdnSky != ''"> and app_idn_sky = #{appIdnSky} </if>
+		  		  <if test="dlyTxnAmt != null and dlyTxnAmt != ''"> and dly_txn_amt = #{dlyTxnAmt} </if>
+		  		  <if test="avnInd != null and avnInd != ''"> and avn_ind = #{avnInd} </if>
+		  		  <if test="lstUpdDte != null and lstUpdDte != ''"> and lst_upd_dte = #{lstUpdDte} </if>
+		  		  <if test="lstUpdTme != null and lstUpdTme != ''"> and lst_upd_tme = #{lstUpdTme} </if>
+		  		  <if test="lstUpdUid != null and lstUpdUid != ''"> and lst_upd_uid = #{lstUpdUid} </if>
+		  		  <if test="lstUpdNbr != null and lstUpdNbr != ''"> and lst_upd_nbr = #{lstUpdNbr} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by app_idn_sky desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from tb_tgen599
+		 <where>  
+		  		  <if test="appIdnSky != null and appIdnSky != ''"> and app_idn_sky = #{appIdnSky} </if>
+		  		  <if test="dlyTxnAmt != null and dlyTxnAmt != ''"> and dly_txn_amt = #{dlyTxnAmt} </if>
+		  		  <if test="avnInd != null and avnInd != ''"> and avn_ind = #{avnInd} </if>
+		  		  <if test="lstUpdDte != null and lstUpdDte != ''"> and lst_upd_dte = #{lstUpdDte} </if>
+		  		  <if test="lstUpdTme != null and lstUpdTme != ''"> and lst_upd_tme = #{lstUpdTme} </if>
+		  		  <if test="lstUpdUid != null and lstUpdUid != ''"> and lst_upd_uid = #{lstUpdUid} </if>
+		  		  <if test="lstUpdNbr != null and lstUpdNbr != ''"> and lst_upd_nbr = #{lstUpdNbr} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.ccaf.domain.Tgen599DO">
+		insert into tb_tgen599
+		(
+			`app_idn_sky`, 
+			`dly_txn_amt`, 
+			`avn_ind`, 
+			`lst_upd_dte`, 
+			`lst_upd_tme`, 
+			`lst_upd_uid`, 
+			`lst_upd_nbr`
+		)
+		values
+		(
+			#{appIdnSky}, 
+			#{dlyTxnAmt}, 
+			#{avnInd}, 
+			#{lstUpdDte}, 
+			#{lstUpdTme}, 
+			#{lstUpdUid}, 
+			#{lstUpdNbr}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.ccaf.domain.Tgen599DO">
+		update tb_tgen599 
+		<set>
+			<if test="dlyTxnAmt != null">`dly_txn_amt` = #{dlyTxnAmt}, </if>
+			<if test="avnInd != null">`avn_ind` = #{avnInd}, </if>
+			<if test="lstUpdDte != null">`lst_upd_dte` = #{lstUpdDte}, </if>
+			<if test="lstUpdTme != null">`lst_upd_tme` = #{lstUpdTme}, </if>
+			<if test="lstUpdUid != null">`lst_upd_uid` = #{lstUpdUid}, </if>
+			<if test="lstUpdNbr != null">`lst_upd_nbr` = #{lstUpdNbr}</if>
+		</set>
+		where app_idn_sky = #{appIdnSky}
+	</update>
+	
+	<delete id="remove">
+		delete from tb_tgen599 where app_idn_sky = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from tb_tgen599 where app_idn_sky in 
+		<foreach item="appIdnSky" collection="array" open="(" separator="," close=")">
+			#{appIdnSky}
+		</foreach>
+	</delete>
+
+</mapper>

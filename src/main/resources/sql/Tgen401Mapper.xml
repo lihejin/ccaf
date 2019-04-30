@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccaf.dao.Tgen401Dao">
+
+	<select id="get" resultType="com.ccaf.domain.Tgen401DO">
+		select `bch_cde`,`bch_nme_txt`,`bch_mgr_nme_txt`,`bch_eml_adr_txt`,`bch_adr_ln1_txt`,`bch_adr_ln3_txt`,`bch_psl_cde_txt`,`bch_cty_txt`,`bch_phe_nbr_1_txt`,`bch_phe_nbr_2_txt`,`bch_ope_1_txt`,`bch_ope_2_txt`,`bch_ope_3_txt`,`bch_ope_4_txt`,`bch_atv_ind`,`bch_rgn_cde`,`lst_upd_ttp`,`lst_upd_uid`,`lst_upd_nbr` from tb_tgen401 where bch_cde = #{value}
+	</select>
+
+	<select id="list" resultType="com.ccaf.domain.Tgen401DO">
+		select `bch_cde`,`bch_nme_txt`,`bch_mgr_nme_txt`,`bch_eml_adr_txt`,`bch_adr_ln1_txt`,`bch_adr_ln3_txt`,`bch_psl_cde_txt`,`bch_cty_txt`,`bch_phe_nbr_1_txt`,`bch_phe_nbr_2_txt`,`bch_ope_1_txt`,`bch_ope_2_txt`,`bch_ope_3_txt`,`bch_ope_4_txt`,`bch_atv_ind`,`bch_rgn_cde`,`lst_upd_ttp`,`lst_upd_uid`,`lst_upd_nbr` from tb_tgen401
+        <where>  
+		  		  <if test="bchCde != null and bchCde != ''"> and bch_cde = #{bchCde} </if>
+		  		  <if test="bchNmeTxt != null and bchNmeTxt != ''"> and bch_nme_txt = #{bchNmeTxt} </if>
+		  		  <if test="bchMgrNmeTxt != null and bchMgrNmeTxt != ''"> and bch_mgr_nme_txt = #{bchMgrNmeTxt} </if>
+		  		  <if test="bchEmlAdrTxt != null and bchEmlAdrTxt != ''"> and bch_eml_adr_txt = #{bchEmlAdrTxt} </if>
+		  		  <if test="bchAdrLn1Txt != null and bchAdrLn1Txt != ''"> and bch_adr_ln1_txt = #{bchAdrLn1Txt} </if>
+		  		  <if test="bchAdrLn3Txt != null and bchAdrLn3Txt != ''"> and bch_adr_ln3_txt = #{bchAdrLn3Txt} </if>
+		  		  <if test="bchPslCdeTxt != null and bchPslCdeTxt != ''"> and bch_psl_cde_txt = #{bchPslCdeTxt} </if>
+		  		  <if test="bchCtyTxt != null and bchCtyTxt != ''"> and bch_cty_txt = #{bchCtyTxt} </if>
+		  		  <if test="bchPheNbr1Txt != null and bchPheNbr1Txt != ''"> and bch_phe_nbr_1_txt = #{bchPheNbr1Txt} </if>
+		  		  <if test="bchPheNbr2Txt != null and bchPheNbr2Txt != ''"> and bch_phe_nbr_2_txt = #{bchPheNbr2Txt} </if>
+		  		  <if test="bchOpe1Txt != null and bchOpe1Txt != ''"> and bch_ope_1_txt = #{bchOpe1Txt} </if>
+		  		  <if test="bchOpe2Txt != null and bchOpe2Txt != ''"> and bch_ope_2_txt = #{bchOpe2Txt} </if>
+		  		  <if test="bchOpe3Txt != null and bchOpe3Txt != ''"> and bch_ope_3_txt = #{bchOpe3Txt} </if>
+		  		  <if test="bchOpe4Txt != null and bchOpe4Txt != ''"> and bch_ope_4_txt = #{bchOpe4Txt} </if>
+		  		  <if test="bchAtvInd != null and bchAtvInd != ''"> and bch_atv_ind = #{bchAtvInd} </if>
+		  		  <if test="bchRgnCde != null and bchRgnCde != ''"> and bch_rgn_cde = #{bchRgnCde} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="lstUpdUid != null and lstUpdUid != ''"> and lst_upd_uid = #{lstUpdUid} </if>
+		  		  <if test="lstUpdNbr != null and lstUpdNbr != ''"> and lst_upd_nbr = #{lstUpdNbr} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by bch_cde desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from tb_tgen401
+		 <where>  
+		  		  <if test="bchCde != null and bchCde != ''"> and bch_cde = #{bchCde} </if>
+		  		  <if test="bchNmeTxt != null and bchNmeTxt != ''"> and bch_nme_txt = #{bchNmeTxt} </if>
+		  		  <if test="bchMgrNmeTxt != null and bchMgrNmeTxt != ''"> and bch_mgr_nme_txt = #{bchMgrNmeTxt} </if>
+		  		  <if test="bchEmlAdrTxt != null and bchEmlAdrTxt != ''"> and bch_eml_adr_txt = #{bchEmlAdrTxt} </if>
+		  		  <if test="bchAdrLn1Txt != null and bchAdrLn1Txt != ''"> and bch_adr_ln1_txt = #{bchAdrLn1Txt} </if>
+		  		  <if test="bchAdrLn3Txt != null and bchAdrLn3Txt != ''"> and bch_adr_ln3_txt = #{bchAdrLn3Txt} </if>
+		  		  <if test="bchPslCdeTxt != null and bchPslCdeTxt != ''"> and bch_psl_cde_txt = #{bchPslCdeTxt} </if>
+		  		  <if test="bchCtyTxt != null and bchCtyTxt != ''"> and bch_cty_txt = #{bchCtyTxt} </if>
+		  		  <if test="bchPheNbr1Txt != null and bchPheNbr1Txt != ''"> and bch_phe_nbr_1_txt = #{bchPheNbr1Txt} </if>
+		  		  <if test="bchPheNbr2Txt != null and bchPheNbr2Txt != ''"> and bch_phe_nbr_2_txt = #{bchPheNbr2Txt} </if>
+		  		  <if test="bchOpe1Txt != null and bchOpe1Txt != ''"> and bch_ope_1_txt = #{bchOpe1Txt} </if>
+		  		  <if test="bchOpe2Txt != null and bchOpe2Txt != ''"> and bch_ope_2_txt = #{bchOpe2Txt} </if>
+		  		  <if test="bchOpe3Txt != null and bchOpe3Txt != ''"> and bch_ope_3_txt = #{bchOpe3Txt} </if>
+		  		  <if test="bchOpe4Txt != null and bchOpe4Txt != ''"> and bch_ope_4_txt = #{bchOpe4Txt} </if>
+		  		  <if test="bchAtvInd != null and bchAtvInd != ''"> and bch_atv_ind = #{bchAtvInd} </if>
+		  		  <if test="bchRgnCde != null and bchRgnCde != ''"> and bch_rgn_cde = #{bchRgnCde} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="lstUpdUid != null and lstUpdUid != ''"> and lst_upd_uid = #{lstUpdUid} </if>
+		  		  <if test="lstUpdNbr != null and lstUpdNbr != ''"> and lst_upd_nbr = #{lstUpdNbr} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.ccaf.domain.Tgen401DO">
+		insert into tb_tgen401
+		(
+			`bch_cde`, 
+			`bch_nme_txt`, 
+			`bch_mgr_nme_txt`, 
+			`bch_eml_adr_txt`, 
+			`bch_adr_ln1_txt`, 
+			`bch_adr_ln3_txt`, 
+			`bch_psl_cde_txt`, 
+			`bch_cty_txt`, 
+			`bch_phe_nbr_1_txt`, 
+			`bch_phe_nbr_2_txt`, 
+			`bch_ope_1_txt`, 
+			`bch_ope_2_txt`, 
+			`bch_ope_3_txt`, 
+			`bch_ope_4_txt`, 
+			`bch_atv_ind`, 
+			`bch_rgn_cde`, 
+			`lst_upd_ttp`, 
+			`lst_upd_uid`, 
+			`lst_upd_nbr`
+		)
+		values
+		(
+			#{bchCde}, 
+			#{bchNmeTxt}, 
+			#{bchMgrNmeTxt}, 
+			#{bchEmlAdrTxt}, 
+			#{bchAdrLn1Txt}, 
+			#{bchAdrLn3Txt}, 
+			#{bchPslCdeTxt}, 
+			#{bchCtyTxt}, 
+			#{bchPheNbr1Txt}, 
+			#{bchPheNbr2Txt}, 
+			#{bchOpe1Txt}, 
+			#{bchOpe2Txt}, 
+			#{bchOpe3Txt}, 
+			#{bchOpe4Txt}, 
+			#{bchAtvInd}, 
+			#{bchRgnCde}, 
+			#{lstUpdTtp}, 
+			#{lstUpdUid}, 
+			#{lstUpdNbr}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.ccaf.domain.Tgen401DO">
+		update tb_tgen401 
+		<set>
+			<if test="bchNmeTxt != null">`bch_nme_txt` = #{bchNmeTxt}, </if>
+			<if test="bchMgrNmeTxt != null">`bch_mgr_nme_txt` = #{bchMgrNmeTxt}, </if>
+			<if test="bchEmlAdrTxt != null">`bch_eml_adr_txt` = #{bchEmlAdrTxt}, </if>
+			<if test="bchAdrLn1Txt != null">`bch_adr_ln1_txt` = #{bchAdrLn1Txt}, </if>
+			<if test="bchAdrLn3Txt != null">`bch_adr_ln3_txt` = #{bchAdrLn3Txt}, </if>
+			<if test="bchPslCdeTxt != null">`bch_psl_cde_txt` = #{bchPslCdeTxt}, </if>
+			<if test="bchCtyTxt != null">`bch_cty_txt` = #{bchCtyTxt}, </if>
+			<if test="bchPheNbr1Txt != null">`bch_phe_nbr_1_txt` = #{bchPheNbr1Txt}, </if>
+			<if test="bchPheNbr2Txt != null">`bch_phe_nbr_2_txt` = #{bchPheNbr2Txt}, </if>
+			<if test="bchOpe1Txt != null">`bch_ope_1_txt` = #{bchOpe1Txt}, </if>
+			<if test="bchOpe2Txt != null">`bch_ope_2_txt` = #{bchOpe2Txt}, </if>
+			<if test="bchOpe3Txt != null">`bch_ope_3_txt` = #{bchOpe3Txt}, </if>
+			<if test="bchOpe4Txt != null">`bch_ope_4_txt` = #{bchOpe4Txt}, </if>
+			<if test="bchAtvInd != null">`bch_atv_ind` = #{bchAtvInd}, </if>
+			<if test="bchRgnCde != null">`bch_rgn_cde` = #{bchRgnCde}, </if>
+			<if test="lstUpdTtp != null">`lst_upd_ttp` = #{lstUpdTtp}, </if>
+			<if test="lstUpdUid != null">`lst_upd_uid` = #{lstUpdUid}, </if>
+			<if test="lstUpdNbr != null">`lst_upd_nbr` = #{lstUpdNbr}</if>
+		</set>
+		where bch_cde = #{bchCde}
+	</update>
+	
+	<delete id="remove">
+		delete from tb_tgen401 where bch_cde = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from tb_tgen401 where bch_cde in 
+		<foreach item="bchCde" collection="array" open="(" separator="," close=")">
+			#{bchCde}
+		</foreach>
+	</delete>
+
+</mapper>

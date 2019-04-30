@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="app_idn_sky" name="app_idn_sky" th:value="${tgen599.app_idn_sky}"  type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">dly_txn_amt：</label>
+								<div class="col-sm-8">
+									<input id="dlyTxnAmt" name="dlyTxnAmt" th:value="${tgen599.dlyTxnAmt}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">avn_ind：</label>
+								<div class="col-sm-8">
+									<input id="avnInd" name="avnInd" th:value="${tgen599.avnInd}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">lst_upd_dte：</label>
+								<div class="col-sm-8">
+									<input id="lstUpdDte" name="lstUpdDte" th:value="${tgen599.lstUpdDte}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">lst_upd_tme：</label>
+								<div class="col-sm-8">
+									<input id="lstUpdTme" name="lstUpdTme" th:value="${tgen599.lstUpdTme}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">lst_upd_uid：</label>
+								<div class="col-sm-8">
+									<input id="lstUpdUid" name="lstUpdUid" th:value="${tgen599.lstUpdUid}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">lst_upd_nbr：</label>
+								<div class="col-sm-8">
+									<input id="lstUpdNbr" name="lstUpdNbr" th:value="${tgen599.lstUpdNbr}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/ccaf/tgen599/edit.js">
+	</script>
+</body>
+</html>

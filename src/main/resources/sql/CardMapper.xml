@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccaf.dao.CardDao">
+
+	<select id="get" resultType="com.ccaf.domain.CardDO">
+		select `lst_upd_ttp`,`pan_txt`,`app_ise_nbr`,`pdt_idn_cde`,`pla_sts_cde`,`end_ttp`,`cvv`,`cvv2`,`pin_oft`,`app_typ`,`pin_ver_pos_txn`,`cv2_rts_nbr`,`pin_rts_nbr`,`rts_nbr_dte`,`end_dte_rts_nbr`,`csr_rts_nbr`,`slt_act_idn_sky`,`top_act_idn_sky`,`csr_idn_sky`,`p_dly_vty_nbr_upl`,`p_dly_vty_amt_upl`,`p_dly_vty_tot_nbr`,`p_dly_vty_tot_amt`,`p_vty_upd_ttp`,`f_dly_vty_tot_nbr`,`f_dly_vty_tot_amt`,`f_vty_upd_ttp`,`ttps`,`lst_upd_nbr`,`app_idn_sky`,`man_act_ind`,`man_csr_idn_sky` from tb_card where pan_txt = #{value}
+	</select>
+
+	<select id="list" resultType="com.ccaf.domain.CardDO">
+		select `lst_upd_ttp`,`pan_txt`,`app_ise_nbr`,`pdt_idn_cde`,`pla_sts_cde`,`end_ttp`,`cvv`,`cvv2`,`pin_oft`,`app_typ`,`pin_ver_pos_txn`,`cv2_rts_nbr`,`pin_rts_nbr`,`rts_nbr_dte`,`end_dte_rts_nbr`,`csr_rts_nbr`,`slt_act_idn_sky`,`top_act_idn_sky`,`csr_idn_sky`,`p_dly_vty_nbr_upl`,`p_dly_vty_amt_upl`,`p_dly_vty_tot_nbr`,`p_dly_vty_tot_amt`,`p_vty_upd_ttp`,`f_dly_vty_tot_nbr`,`f_dly_vty_tot_amt`,`f_vty_upd_ttp`,`ttps`,`lst_upd_nbr`,`app_idn_sky`,`man_act_ind`,`man_csr_idn_sky` from tb_card
+        <where>  
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="panTxt != null and panTxt != ''"> and pan_txt = #{panTxt} </if>
+		  		  <if test="appIseNbr != null and appIseNbr != ''"> and app_ise_nbr = #{appIseNbr} </if>
+		  		  <if test="pdtIdnCde != null and pdtIdnCde != ''"> and pdt_idn_cde = #{pdtIdnCde} </if>
+		  		  <if test="plaStsCde != null and plaStsCde != ''"> and pla_sts_cde = #{plaStsCde} </if>
+		  		  <if test="endTtp != null and endTtp != ''"> and end_ttp = #{endTtp} </if>
+		  		  <if test="cvv != null and cvv != ''"> and cvv = #{cvv} </if>
+		  		  <if test="cvv2 != null and cvv2 != ''"> and cvv2 = #{cvv2} </if>
+		  		  <if test="pinOft != null and pinOft != ''"> and pin_oft = #{pinOft} </if>
+		  		  <if test="appTyp != null and appTyp != ''"> and app_typ = #{appTyp} </if>
+		  		  <if test="pinVerPosTxn != null and pinVerPosTxn != ''"> and pin_ver_pos_txn = #{pinVerPosTxn} </if>
+		  		  <if test="cv2RtsNbr != null and cv2RtsNbr != ''"> and cv2_rts_nbr = #{cv2RtsNbr} </if>
+		  		  <if test="pinRtsNbr != null and pinRtsNbr != ''"> and pin_rts_nbr = #{pinRtsNbr} </if>
+		  		  <if test="rtsNbrDte != null and rtsNbrDte != ''"> and rts_nbr_dte = #{rtsNbrDte} </if>
+		  		  <if test="endDteRtsNbr != null and endDteRtsNbr != ''"> and end_dte_rts_nbr = #{endDteRtsNbr} </if>
+		  		  <if test="csrRtsNbr != null and csrRtsNbr != ''"> and csr_rts_nbr = #{csrRtsNbr} </if>
+		  		  <if test="sltActIdnSky != null and sltActIdnSky != ''"> and slt_act_idn_sky = #{sltActIdnSky} </if>
+		  		  <if test="topActIdnSky != null and topActIdnSky != ''"> and top_act_idn_sky = #{topActIdnSky} </if>
+		  		  <if test="csrIdnSky != null and csrIdnSky != ''"> and csr_idn_sky = #{csrIdnSky} </if>
+		  		  <if test="pDlyVtyNbrUpl != null and pDlyVtyNbrUpl != ''"> and p_dly_vty_nbr_upl = #{pDlyVtyNbrUpl} </if>
+		  		  <if test="pDlyVtyAmtUpl != null and pDlyVtyAmtUpl != ''"> and p_dly_vty_amt_upl = #{pDlyVtyAmtUpl} </if>
+		  		  <if test="pDlyVtyTotNbr != null and pDlyVtyTotNbr != ''"> and p_dly_vty_tot_nbr = #{pDlyVtyTotNbr} </if>
+		  		  <if test="pDlyVtyTotAmt != null and pDlyVtyTotAmt != ''"> and p_dly_vty_tot_amt = #{pDlyVtyTotAmt} </if>
+		  		  <if test="pVtyUpdTtp != null and pVtyUpdTtp != ''"> and p_vty_upd_ttp = #{pVtyUpdTtp} </if>
+		  		  <if test="fDlyVtyTotNbr != null and fDlyVtyTotNbr != ''"> and f_dly_vty_tot_nbr = #{fDlyVtyTotNbr} </if>
+		  		  <if test="fDlyVtyTotAmt != null and fDlyVtyTotAmt != ''"> and f_dly_vty_tot_amt = #{fDlyVtyTotAmt} </if>
+		  		  <if test="fVtyUpdTtp != null and fVtyUpdTtp != ''"> and f_vty_upd_ttp = #{fVtyUpdTtp} </if>
+		  		  <if test="ttps != null and ttps != ''"> and ttps = #{ttps} </if>
+		  		  <if test="lstUpdNbr != null and lstUpdNbr != ''"> and lst_upd_nbr = #{lstUpdNbr} </if>
+		  		  <if test="appIdnSky != null and appIdnSky != ''"> and app_idn_sky = #{appIdnSky} </if>
+		  		  <if test="manActInd != null and manActInd != ''"> and man_act_ind = #{manActInd} </if>
+		  		  <if test="manCsrIdnSky != null and manCsrIdnSky != ''"> and man_csr_idn_sky = #{manCsrIdnSky} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by lst_upd_ttp desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from tb_card
+		 <where>  
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="panTxt != null and panTxt != ''"> and pan_txt = #{panTxt} </if>
+		  		  <if test="appIseNbr != null and appIseNbr != ''"> and app_ise_nbr = #{appIseNbr} </if>
+		  		  <if test="pdtIdnCde != null and pdtIdnCde != ''"> and pdt_idn_cde = #{pdtIdnCde} </if>
+		  		  <if test="plaStsCde != null and plaStsCde != ''"> and pla_sts_cde = #{plaStsCde} </if>
+		  		  <if test="endTtp != null and endTtp != ''"> and end_ttp = #{endTtp} </if>
+		  		  <if test="cvv != null and cvv != ''"> and cvv = #{cvv} </if>
+		  		  <if test="cvv2 != null and cvv2 != ''"> and cvv2 = #{cvv2} </if>
+		  		  <if test="pinOft != null and pinOft != ''"> and pin_oft = #{pinOft} </if>
+		  		  <if test="appTyp != null and appTyp != ''"> and app_typ = #{appTyp} </if>
+		  		  <if test="pinVerPosTxn != null and pinVerPosTxn != ''"> and pin_ver_pos_txn = #{pinVerPosTxn} </if>
+		  		  <if test="cv2RtsNbr != null and cv2RtsNbr != ''"> and cv2_rts_nbr = #{cv2RtsNbr} </if>
+		  		  <if test="pinRtsNbr != null and pinRtsNbr != ''"> and pin_rts_nbr = #{pinRtsNbr} </if>
+		  		  <if test="rtsNbrDte != null and rtsNbrDte != ''"> and rts_nbr_dte = #{rtsNbrDte} </if>
+		  		  <if test="endDteRtsNbr != null and endDteRtsNbr != ''"> and end_dte_rts_nbr = #{endDteRtsNbr} </if>
+		  		  <if test="csrRtsNbr != null and csrRtsNbr != ''"> and csr_rts_nbr = #{csrRtsNbr} </if>
+		  		  <if test="sltActIdnSky != null and sltActIdnSky != ''"> and slt_act_idn_sky = #{sltActIdnSky} </if>
+		  		  <if test="topActIdnSky != null and topActIdnSky != ''"> and top_act_idn_sky = #{topActIdnSky} </if>
+		  		  <if test="csrIdnSky != null and csrIdnSky != ''"> and csr_idn_sky = #{csrIdnSky} </if>
+		  		  <if test="pDlyVtyNbrUpl != null and pDlyVtyNbrUpl != ''"> and p_dly_vty_nbr_upl = #{pDlyVtyNbrUpl} </if>
+		  		  <if test="pDlyVtyAmtUpl != null and pDlyVtyAmtUpl != ''"> and p_dly_vty_amt_upl = #{pDlyVtyAmtUpl} </if>
+		  		  <if test="pDlyVtyTotNbr != null and pDlyVtyTotNbr != ''"> and p_dly_vty_tot_nbr = #{pDlyVtyTotNbr} </if>
+		  		  <if test="pDlyVtyTotAmt != null and pDlyVtyTotAmt != ''"> and p_dly_vty_tot_amt = #{pDlyVtyTotAmt} </if>
+		  		  <if test="pVtyUpdTtp != null and pVtyUpdTtp != ''"> and p_vty_upd_ttp = #{pVtyUpdTtp} </if>
+		  		  <if test="fDlyVtyTotNbr != null and fDlyVtyTotNbr != ''"> and f_dly_vty_tot_nbr = #{fDlyVtyTotNbr} </if>
+		  		  <if test="fDlyVtyTotAmt != null and fDlyVtyTotAmt != ''"> and f_dly_vty_tot_amt = #{fDlyVtyTotAmt} </if>
+		  		  <if test="fVtyUpdTtp != null and fVtyUpdTtp != ''"> and f_vty_upd_ttp = #{fVtyUpdTtp} </if>
+		  		  <if test="ttps != null and ttps != ''"> and ttps = #{ttps} </if>
+		  		  <if test="lstUpdNbr != null and lstUpdNbr != ''"> and lst_upd_nbr = #{lstUpdNbr} </if>
+		  		  <if test="appIdnSky != null and appIdnSky != ''"> and app_idn_sky = #{appIdnSky} </if>
+		  		  <if test="manActInd != null and manActInd != ''"> and man_act_ind = #{manActInd} </if>
+		  		  <if test="manCsrIdnSky != null and manCsrIdnSky != ''"> and man_csr_idn_sky = #{manCsrIdnSky} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.ccaf.domain.CardDO">
+		insert into tb_card
+		(
+			`lst_upd_ttp`, 
+			`pan_txt`, 
+			`app_ise_nbr`, 
+			`pdt_idn_cde`, 
+			`pla_sts_cde`, 
+			`end_ttp`, 
+			`cvv`, 
+			`cvv2`, 
+			`pin_oft`, 
+			`app_typ`, 
+			`pin_ver_pos_txn`, 
+			`cv2_rts_nbr`, 
+			`pin_rts_nbr`, 
+			`rts_nbr_dte`, 
+			`end_dte_rts_nbr`, 
+			`csr_rts_nbr`, 
+			`slt_act_idn_sky`, 
+			`top_act_idn_sky`, 
+			`csr_idn_sky`, 
+			`p_dly_vty_nbr_upl`, 
+			`p_dly_vty_amt_upl`, 
+			`p_dly_vty_tot_nbr`, 
+			`p_dly_vty_tot_amt`, 
+			`p_vty_upd_ttp`, 
+			`f_dly_vty_tot_nbr`, 
+			`f_dly_vty_tot_amt`, 
+			`f_vty_upd_ttp`, 
+			`ttps`, 
+			`lst_upd_nbr`, 
+			`app_idn_sky`, 
+			`man_act_ind`, 
+			`man_csr_idn_sky`
+		)
+		values
+		(
+			#{lstUpdTtp}, 
+			#{panTxt}, 
+			#{appIseNbr}, 
+			#{pdtIdnCde}, 
+			#{plaStsCde}, 
+			#{endTtp}, 
+			#{cvv}, 
+			#{cvv2}, 
+			#{pinOft}, 
+			#{appTyp}, 
+			#{pinVerPosTxn}, 
+			#{cv2RtsNbr}, 
+			#{pinRtsNbr}, 
+			#{rtsNbrDte}, 
+			#{endDteRtsNbr}, 
+			#{csrRtsNbr}, 
+			#{sltActIdnSky}, 
+			#{topActIdnSky}, 
+			#{csrIdnSky}, 
+			#{pDlyVtyNbrUpl}, 
+			#{pDlyVtyAmtUpl}, 
+			#{pDlyVtyTotNbr}, 
+			#{pDlyVtyTotAmt}, 
+			#{pVtyUpdTtp}, 
+			#{fDlyVtyTotNbr}, 
+			#{fDlyVtyTotAmt}, 
+			#{fVtyUpdTtp}, 
+			#{ttps}, 
+			#{lstUpdNbr}, 
+			#{appIdnSky}, 
+			#{manActInd}, 
+			#{manCsrIdnSky}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.ccaf.domain.CardDO">
+		update tb_card 
+		<set>
+			<!--<if test="panTxt != null">`pan_txt` = #{panTxt}, </if>-->
+			<!--<if test="appIseNbr != null">`app_ise_nbr` = #{appIseNbr}, </if>-->
+			<if test="pdtIdnCde != null">`pdt_idn_cde` = #{pdtIdnCde}, </if>
+			<if test="plaStsCde != null">`pla_sts_cde` = #{plaStsCde}, </if>
+			<if test="endTtp != null">`end_ttp` = #{endTtp}, </if>
+			<if test="cvv != null">`cvv` = #{cvv}, </if>
+			<if test="cvv2 != null">`cvv2` = #{cvv2}, </if>
+			<if test="pinOft != null">`pin_oft` = #{pinOft}, </if>
+			<if test="appTyp != null">`app_typ` = #{appTyp}, </if>
+			<if test="pinVerPosTxn != null">`pin_ver_pos_txn` = #{pinVerPosTxn}, </if>
+			<if test="cv2RtsNbr != null">`cv2_rts_nbr` = #{cv2RtsNbr}, </if>
+			<if test="pinRtsNbr != null">`pin_rts_nbr` = #{pinRtsNbr}, </if>
+			<if test="rtsNbrDte != null">`rts_nbr_dte` = #{rtsNbrDte}, </if>
+			<if test="endDteRtsNbr != null">`end_dte_rts_nbr` = #{endDteRtsNbr}, </if>
+			<if test="csrRtsNbr != null">`csr_rts_nbr` = #{csrRtsNbr}, </if>
+			<if test="sltActIdnSky != null">`slt_act_idn_sky` = #{sltActIdnSky}, </if>
+			<if test="topActIdnSky != null">`top_act_idn_sky` = #{topActIdnSky}, </if>
+			<if test="csrIdnSky != null">`csr_idn_sky` = #{csrIdnSky}, </if>
+			<if test="pDlyVtyNbrUpl != null">`p_dly_vty_nbr_upl` = #{pDlyVtyNbrUpl}, </if>
+			<if test="pDlyVtyAmtUpl != null">`p_dly_vty_amt_upl` = #{pDlyVtyAmtUpl}, </if>
+			<if test="pDlyVtyTotNbr != null">`p_dly_vty_tot_nbr` = #{pDlyVtyTotNbr}, </if>
+			<if test="pDlyVtyTotAmt != null">`p_dly_vty_tot_amt` = #{pDlyVtyTotAmt}, </if>
+			<if test="pVtyUpdTtp != null">`p_vty_upd_ttp` = #{pVtyUpdTtp}, </if>
+			<if test="fDlyVtyTotNbr != null">`f_dly_vty_tot_nbr` = #{fDlyVtyTotNbr}, </if>
+			<if test="fDlyVtyTotAmt != null">`f_dly_vty_tot_amt` = #{fDlyVtyTotAmt}, </if>
+			<if test="fVtyUpdTtp != null">`f_vty_upd_ttp` = #{fVtyUpdTtp}, </if>
+			<if test="ttps != null">`ttps` = #{ttps}, </if>
+			<if test="lstUpdNbr != null">`lst_upd_nbr` = #{lstUpdNbr}, </if>
+			<if test="appIdnSky != null">`app_idn_sky` = #{appIdnSky}, </if>
+			<if test="manActInd != null">`man_act_ind` = #{manActInd}, </if>
+			<if test="manCsrIdnSky != null">`man_csr_idn_sky` = #{manCsrIdnSky}</if>
+		</set>
+		where pan_txt = #{panTxt}
+		and app_ise_nbr = #{appIseNbr}
+	</update>
+	
+	<delete id="remove">
+		delete from tb_card where lst_upd_ttp = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from tb_card where lst_upd_ttp in 
+		<foreach item="lstUpdTtp" collection="array" open="(" separator="," close=")">
+			#{lstUpdTtp}
+		</foreach>
+	</delete>
+
+</mapper>

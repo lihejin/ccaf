@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ccaf.dao.Tgen025Dao">
+
+	<select id="get" resultType="com.ccaf.domain.Tgen025DO">
+		select `itn_idn_cde`,`lst_upd_ttp`,`txn_src_cde`,`cry_cde`,`cvt_rte_pct`,`lst_upd_usr` from tb_tgen025 where itn_idn_cde = #{value}
+	</select>
+
+	<select id="list" resultType="com.ccaf.domain.Tgen025DO">
+		select `itn_idn_cde`,`lst_upd_ttp`,`txn_src_cde`,`cry_cde`,`cvt_rte_pct`,`lst_upd_usr` from tb_tgen025
+        <where>  
+		  		  <if test="itnIdnCde != null and itnIdnCde != ''"> and itn_idn_cde = #{itnIdnCde} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="txnSrcCde != null and txnSrcCde != ''"> and txn_src_cde = #{txnSrcCde} </if>
+		  		  <if test="cryCde != null and cryCde != ''"> and cry_cde = #{cryCde} </if>
+		  		  <if test="cvtRtePct != null and cvtRtePct != ''"> and cvt_rte_pct = #{cvtRtePct} </if>
+		  		  <if test="lstUpdUsr != null and lstUpdUsr != ''"> and lst_upd_usr = #{lstUpdUsr} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by itn_idn_cde desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from tb_tgen025
+		 <where>  
+		  		  <if test="itnIdnCde != null and itnIdnCde != ''"> and itn_idn_cde = #{itnIdnCde} </if>
+		  		  <if test="lstUpdTtp != null and lstUpdTtp != ''"> and lst_upd_ttp = #{lstUpdTtp} </if>
+		  		  <if test="txnSrcCde != null and txnSrcCde != ''"> and txn_src_cde = #{txnSrcCde} </if>
+		  		  <if test="cryCde != null and cryCde != ''"> and cry_cde = #{cryCde} </if>
+		  		  <if test="cvtRtePct != null and cvtRtePct != ''"> and cvt_rte_pct = #{cvtRtePct} </if>
+		  		  <if test="lstUpdUsr != null and lstUpdUsr != ''"> and lst_upd_usr = #{lstUpdUsr} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.ccaf.domain.Tgen025DO">
+		insert into tb_tgen025
+		(
+			`itn_idn_cde`, 
+			`lst_upd_ttp`, 
+			`txn_src_cde`, 
+			`cry_cde`, 
+			`cvt_rte_pct`, 
+			`lst_upd_usr`
+		)
+		values
+		(
+			#{itnIdnCde}, 
+			#{lstUpdTtp}, 
+			#{txnSrcCde}, 
+			#{cryCde}, 
+			#{cvtRtePct}, 
+			#{lstUpdUsr}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.ccaf.domain.Tgen025DO">
+		update tb_tgen025 
+		<set>
+			<if test="lstUpdTtp != null">`lst_upd_ttp` = #{lstUpdTtp}, </if>
+			<if test="txnSrcCde != null">`txn_src_cde` = #{txnSrcCde}, </if>
+			<if test="cryCde != null">`cry_cde` = #{cryCde}, </if>
+			<if test="cvtRtePct != null">`cvt_rte_pct` = #{cvtRtePct}, </if>
+			<if test="lstUpdUsr != null">`lst_upd_usr` = #{lstUpdUsr}</if>
+		</set>
+		where itn_idn_cde = #{itnIdnCde}
+	</update>
+	
+	<delete id="remove">
+		delete from tb_tgen025 where itn_idn_cde = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from tb_tgen025 where itn_idn_cde in 
+		<foreach item="itnIdnCde" collection="array" open="(" separator="," close=")">
+			#{itnIdnCde}
+		</foreach>
+	</delete>
+
+</mapper>
